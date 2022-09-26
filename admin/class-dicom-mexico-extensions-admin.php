@@ -58,6 +58,10 @@ class Dicom_Mexico_Extensions_Admin {
 
 		add_action( 'init', array( $this, 'dme_register_blocks') );
 
+		add_filter( 'block_categories_all', array( $this, 'dme_new_block_category'), 10 , 2 );
+
+		add_action( 'enqueue_block_editor_assets', array( $this, 'dme_blocks_enqueue_scripts' ) );
+
 	}
 
 	/**
@@ -123,6 +127,7 @@ class Dicom_Mexico_Extensions_Admin {
 	 * Register the Gutenberg blocks for the admin area.
 	 *
 	 * @since    1.0.0
+	 * @link	 https://developer.wordpress.org/reference/functions/register_block_type/
 	 */
 	public function dme_register_blocks() {
 
@@ -131,15 +136,57 @@ class Dicom_Mexico_Extensions_Admin {
 			$this->plugin_name . '/facts',
 		);
 
-		foreach( $blocks as $block ) {
+		foreach( $blocks as $block_type ) {
 			register_block_type(
-				$block,
+				$block_type,
 				array(
 					'editor_script' => $this->plugin_name . '-editor-blocks'
 				)
 			);
 		}
+	}
 
+	/**
+	 * Register the Gutenberg custom categories blocks for the admin area.
+	 *
+	 * @since    1.0.0
+	 * @link 	 https://developer.wordpress.org/reference/hooks/block_categories_all/
+	 */
+	public function dme_new_block_category( $block_categories, $block_editor_context ) {
+
+		return array_merge(
+			$block_categories,
+			array(
+				array(
+					'slug'  => 'dicom-blocks',
+					'title' => esc_html__( 'Bloques Dicom Mexico', 'dicom-mexico-extensions' ),
+					'icon'  => 'awards', // Slug of a WordPress Dashicon or custom SVG
+				)
+			)
+		);
+	}
+
+	/**
+	 * Register the Gutenberg custom css blocks for the admin area.
+	 *
+	 * @since    1.0.0
+	 * @link 	 https://developer.wordpress.org/reference/hooks/enqueue_block_editor_assets/
+	 */
+	public function dme_blocks_enqueue_scripts() {
+		wp_enqueue_style(
+			'bootstrap',
+			plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css',
+			array(),
+			'5.0.0'
+		);
+
+		wp_enqueue_style(
+			$this->plugin_name . '-main',
+			plugin_dir_url( __FILE__ ) . 'css/style.css',
+			array('bootstrap'),
+			$this->version,
+			'all'
+		);
 	}
 
 }
