@@ -47,10 +47,16 @@ class Dicom_Mexico_Extensions_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $blocks_assets ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->blocks_assets = $blocks_assets;
+
+		$this->plugin_path = plugin_dir_path( dirname( __FILE__ ) );
+
+		add_action( 'init', array( $this, 'dme_register_blocks') );
 
 	}
 
@@ -96,7 +102,43 @@ class Dicom_Mexico_Extensions_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dicom-mexico-extensions-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script(
+			$this->plugin_name,
+			plugin_dir_url( __FILE__ ) . 'js/dicom-mexico-extensions-admin.js',
+			array( 'jquery' ),
+			$this->version,
+			false
+		);
+
+		wp_register_script(
+			$this->plugin_name . '-editor-blocks',
+			plugin_dir_url( __FILE__ ) . 'blocks/build/index.js',
+			$this->blocks_assets['dependencies'],
+			$this->blocks_assets['version']
+		);
+
+	}
+
+	/**
+	 * Register the Gutenberg blocks for the admin area.
+	 *
+	 * @since    1.0.0
+	 */
+	public function dme_register_blocks() {
+
+		$blocks = array(
+			$this->plugin_name . '/about',
+			$this->plugin_name . '/facts',
+		);
+
+		foreach( $blocks as $block ) {
+			register_block_type(
+				$block,
+				array(
+					'editor_script' => $this->plugin_name . '-editor-blocks'
+				)
+			);
+		}
 
 	}
 

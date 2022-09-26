@@ -74,6 +74,9 @@ class Dicom_Mexico_Extensions {
 		}
 		$this->plugin_name = 'dicom-mexico-extensions';
 
+		//Defining blocks assets when blocks are started or compiled
+		$this->blocks_assets = include_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/blocks/build/index.asset.php';
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -152,7 +155,7 @@ class Dicom_Mexico_Extensions {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Dicom_Mexico_Extensions_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Dicom_Mexico_Extensions_Admin( $this->get_plugin_name(), $this->get_version(), $this->get_blocks_assets() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -213,6 +216,16 @@ class Dicom_Mexico_Extensions {
 	 */
 	public function get_version() {
 		return $this->version;
+	}
+
+	/**
+	 * Retrieve the index assets of the plugin's gutenberg blocks.
+	 *
+	 * @since     1.0.0
+	 * @return    array    The index assets of the plugin's gutenberg blocks.
+	 */
+	public function get_blocks_assets() {
+		return $this->blocks_assets;
 	}
 
 }
