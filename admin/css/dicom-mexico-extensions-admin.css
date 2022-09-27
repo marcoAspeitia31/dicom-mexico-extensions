@@ -2,3 +2,19 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+ .edit-post-sidebar * {
+    font-size: 1rem;
+    font-family: "Roboto",sans-serif;
+ }
+
+ .edit-post-sidebar a {
+    color: #2271b1;
+ }
+
+ .interface-complementary-area h3 {
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: #1e1e1e;
+    margin-bottom: 1.5em;
+}

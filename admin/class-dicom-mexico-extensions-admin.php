@@ -173,6 +173,14 @@ class Dicom_Mexico_Extensions_Admin {
 	 * @link 	 https://developer.wordpress.org/reference/hooks/enqueue_block_editor_assets/
 	 */
 	public function dme_blocks_enqueue_scripts() {
+
+		wp_enqueue_style(
+			'font-aswesome-style',
+			plugin_dir_url( __FILE__ ) . 'css/all.min.css',
+			array(),
+			'5.10.2'
+		);
+
 		wp_enqueue_style(
 			'bootstrap',
 			plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css',
