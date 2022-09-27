@@ -1,57 +1,130 @@
+import { RichText, MediaUpload } from '@wordpress/block-editor'
+import { Button } from '@wordpress/components'
+
 const Edit = ( props ) => {
-    return(
+    const {
+        attributes: {
+            title,
+            sectionContent,
+            imageOneUrl,
+            imageOneAlt,
+            imageTwoUrl,
+            imageTwoAlt,
+            subtitleOne,
+            subtitleTwo,
+            featuredSectionImage
+        },
+        setAttributes,
+        className
+    } = props
+    const onChangeTitle = ( newTitle ) => setAttributes( { title: newTitle } )
+    const onChangeContent = ( newContent ) => setAttributes( { sectionContent: newContent } )
+    const onSelectImageOne = ( newImageOne ) => {
+        setAttributes( {
+            imageOneUrl: newImageOne.sizes.full.url,
+            imageOneAlt: newImageOne.alt
+        } )
+    }
+    const onChangeSubtitleOne = ( newSubtitleOne ) => setAttributes( { subtitleOne: newSubtitleOne } )
+    const onSelectImageTwo = ( newImageTwo ) => {
+        setAttributes( {
+            imageTwoUrl: newImageTwo.sizes.full.url,
+            imageTwoAlt: newImageTwo.alt
+        } )
+    }
+    const onChangeSubtitleTwo = ( newSubtitleTwo ) => setAttributes( { subtitleTwo: newSubtitleTwo } )
+    const onSelectFeaturedSectionImage = ( newFeaturedSectionImage ) => {
+        setAttributes( {
+            featuredSectionImage: newFeaturedSectionImage.sizes.full.url
+        } )
+    }
+    return (
         <div className="container-xxl py-5">
             <div className="container">
                 <div className="row g-5 align-items-center">
-                    <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div className="col-lg-6">
                         <div className="h-100">
-                            <h1 className="display-6 mb-5">Welcome To Best Cooling & Heating Service Center</h1>
+                            <RichText
+                                tagName='h2'
+                                className='display-6 mb-5'
+                                placeholder='Agrega un título a esta sección'
+                                value={ title }
+                                onChange={ onChangeTitle }
+                            />
                             <div className="row g-4 mb-4">
                                 <div className="col-sm-6">
                                     <div className="d-flex align-items-center">
-                                        <h5 className="mb-0">Expert Technician</h5>
+                                        <img src={ imageOneUrl } alt={ imageOneAlt }/>
+                                        <MediaUpload
+                                            type = 'image'
+                                            onSelect={ onSelectImageOne }
+                                            render = { ( { open } ) => (
+                                                <Button
+                                                    onClick = { open }
+                                                    icon = 'format-image'
+                                                    showTooltip = 'true'
+                                                    label = 'Seleccionar imagen'
+                                                />
+                                            ) }
+                                        />
+                                        <RichText
+                                            tagName='h5'
+                                            className='mb-0 subtitle-2'
+                                            placeholder='Característica 1'
+                                            value = { subtitleOne }
+                                            onChange = { onChangeSubtitleOne }
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
                                     <div className="d-flex align-items-center">
-                                        <h5 className="mb-0">Best Quality Services</h5>
+                                        <img src={ imageTwoUrl } alt={ imageTwoAlt }/>
+                                        <MediaUpload
+                                            type = 'image'
+                                            onSelect={ onSelectImageTwo }
+                                            render = { ( { open } ) => (
+                                                <Button
+                                                    onClick = { open }
+                                                    isSmall = 'true'
+                                                    icon = 'format-image'
+                                                    showTooltip = 'true'
+                                                    label = 'Seleccionar imagen'
+                                                />
+                                            ) }
+                                        />
+                                        <RichText
+                                            tagName='h5'
+                                            className='mb-0'
+                                            placeholder='Característica 2'
+                                            value = { subtitleTwo }
+                                            onChange = { onChangeSubtitleTwo }
+                                        />
                                     </div>
                                 </div>
                             </div>
-                            <p className="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <div className="border-top mt-4 pt-4">
-                                <div className="row">
-                                    <div className="col-sm-6">
-                                        <div className="d-flex align-items-center">
-                                            <div className="btn-lg-square bg-primary rounded-circle me-3">
-                                                <i className="fa fa-phone-alt text-white"></i>
-                                            </div>
-                                            <h5 className="mb-0">+012 345 6789</h5>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-6">
-                                        <div className="d-flex align-items-center">
-                                            <div className="btn-lg-square bg-primary rounded-circle me-3">
-                                                <i className="fa fa-envelope text-white"></i>
-                                            </div>
-                                            <h5 className="mb-0">info@example.com</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <RichText
+                                tagName='p'
+                                className='mb-4'
+                                placeholder = 'Agregar el contenido de esta sección'
+                                value = { sectionContent }
+                                onChange = { onChangeContent }
+                            />
                         </div>
                     </div>
                     <div className="col-lg-6">
-                        <div className="row g-3">
-                            <div className="col-6 text-end">
-                            </div>
-                            <div className="col-6 text-start">
-                            </div>
-                            <div className="col-6 text-end">
-                            </div>
-                            <div className="col-6 text-start">
-                            </div>
-                        </div>
+                        <img src={ featuredSectionImage } />
+                        <MediaUpload
+                            type = 'image'
+                            onSelect={ onSelectFeaturedSectionImage }
+                            render = { ( { open } ) => (
+                                <Button
+                                    onClick = { open }
+                                    icon = 'format-image'
+                                    text = 'Agregar una imagen de 630 x 550'
+                                    className = 'mt-3 btn bg-secondary text-white'
+                                />
+                            ) }
+                        />
                     </div>
                 </div>
             </div>
