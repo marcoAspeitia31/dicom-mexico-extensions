@@ -1,0 +1,12 @@
+{
+    "apiVersion": 2,
+    "name": "dicom-mexico-extensions/news",
+    "title": "News",
+    "category": "dicom-blocks",
+    "icon": "list-view",
+    "description": "Show news",
+    "keywords": ["posts", "news", "dicom"],
+    "version": "0.0.1",
+    "textdomain": "dicom-mexico-extensions",
+    "editorScript": "file:./build/index.js"
+}
