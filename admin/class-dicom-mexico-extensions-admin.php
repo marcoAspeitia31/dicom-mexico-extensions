@@ -218,9 +218,53 @@ class Dicom_Mexico_Extensions_Admin {
 
 	// Database query to render in the frontend
 	function dme_news_render_callback( $block_attributes, $block_content ) {
-		$return = '<p class=wp-block-plz-news>Hola</p>';
 
-		return $return;
+		$block_classes = isset( $block_attributes['className'] ) ? $block_attributes[ 'className' ] . 'wp-block-plz-news' : 'wp-block-plz-news';
+		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
+
+		$args = array(
+			'posts_per_page' => $block_attributes['per_page']
+		);
+
+		if( isset( $block_attributes['category'] ) ) {
+			$args['category'] = $block_attributes['category'];
+		}
+
+		$posts = new WP_Query( $args );
+
+		$render = '';
+
+		if( $posts->have_posts( ) ) {
+			$render .= '<div class="' . esc_attr( $block_classes ) . '">';
+				$render .= '<div class="container-xxl py-5">';
+					$render .= '<div class="container">';
+						$render .= '<div class="text-center mx-auto wow fadeInUp">';
+							$render .= '<h2 class="display-6 mb-5">' . $block_title . '</h2>';
+						$render .= '</div>';
+						$render .= '<div class="row g-4 justify-content-center">';
+							while( $posts->have_posts( ) ){
+								$posts->the_post( );
+								$render.= '<div class="col-lg-4 col-md-6 wow fadeInUp">';
+									$render .= '<div class="service-item">';
+										$render .= get_the_post_thumbnail( get_the_ID(), 'services-thumb' );
+										$render .= '<div class="d-flex align-items-center bg-light">';
+											$render .= '<div class="service-icon flex-shrink-0 bg-primary">';
+											$render .= '</div>';
+											$render .= '<a class="h4 mx-4 mb-0" href=' . get_the_permalink( get_the_ID() ) . '>';
+											$render .= get_the_title( get_the_ID( ) );
+											$render .= '</a>';
+										$render .= '</div>';
+									$render .= '</div>';
+								$render .= '</div>';
+							}
+						$render .= '</div>';
+					$render .= '</div>';
+				$render .= '</div>';
+			$render .= '</div>';
+		}
+
+		wp_reset_postdata( );
+		return $render;
 	}
 
 	/**
@@ -247,7 +291,7 @@ class Dicom_Mexico_Extensions_Admin {
 	public function dme_get_post_featured_image( $object ) {
 		if( $object['featured_media'] ){
 			//Get the image URL
-			$field = wp_get_attachment_image_src( $object['featured_media'], 'large', false );
+			$field = wp_get_attachment_image_src( $object['featured_media'], 'services-thumb', false );
 
 			//returns the URL
 			return $field[0];

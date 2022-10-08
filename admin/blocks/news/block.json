@@ -9,6 +9,10 @@
     "version": "0.0.1",
     "textdomain": "dicom-mexico-extensions",
     "attributes": {
+        "title": {
+            "type": "string",
+            "selector": "h2"
+        },
         "category": {
             "type": "integer"
         },

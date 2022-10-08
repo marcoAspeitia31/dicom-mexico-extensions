@@ -7,7 +7,7 @@
  * @sice 1.0.0
  */
 
-import { useBlockProps } from '@wordpress/block-editor'
+import { useBlockProps, RichText } from '@wordpress/block-editor'
 import apiFetch from '@wordpress/api-fetch'
 import { useState, useEffect } from '@wordpress/element'
 import { InspectorControls } from '@wordpress/block-editor'
@@ -16,8 +16,8 @@ import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
 
-    const { attributes, setAttributes } = props
-    const { category, per_page } = attributes
+    const { attributes: {category, per_page, title}, setAttributes } = props
+    //const { category, per_page } = attributes
     const blockProps = useBlockProps()
     /**
      * useState Returns a stateful value, and a function to update it.
@@ -72,6 +72,17 @@ const Edit = ( props ) => {
     useEffect( () => {
         fetchPosts()
     }, [category, per_page] )
+
+    /**
+     * Register onChange events
+     */
+    const onChangeCategory = newCategory => {
+        setAttributes( { category: newCategory } )
+    }
+    const onChangePagePerPosts = newPerPage => {
+        setAttributes( { per_page: newPerPage } )
+    }
+    const onChangeTitle = newTitle => { setAttributes( { title: newTitle } ) }
     
     return (
         <>
@@ -84,7 +95,7 @@ const Edit = ( props ) => {
                             label={ __( 'Current category', 'dicom-mexico-extensions' ) }
                             value={ category || 0 }
                             options={ categories }
-                            onChange={ (newCategory) => setAttributes( { category: newCategory } ) }
+                            onChange={ onChangeCategory }
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Posts per page', 'dicom-mexico-extensions' ) } initialOpen={true}>
@@ -92,7 +103,8 @@ const Edit = ( props ) => {
                             label={ __( 'Current post per page value', 'dicom-mexico-extensions' ) }
                             type='number'
                             value={ per_page }
-                            onChange={ ( newPerPage ) => setAttributes( { per_page: newPerPage } ) }
+                            onChange={ onChangePagePerPosts }
+                            min={1}
                             help={ __( 'Choose the number of posts to render', 'dicom-mexico-extensions' ) }
                         />
                     </PanelBody>
@@ -100,12 +112,18 @@ const Edit = ( props ) => {
             </InspectorControls>
         }
         {
-            posts.length > 0 && 
+            posts.length > 0 &&
             <div { ...blockProps }>
                 <div className="container-xxl py-5">
                     <div className="container">
                         <div className="text-center mx-auto wow fadeInUp">
-                            <h2 className="display-6 mb-5">Últimas noticias</h2>
+                            <RichText
+                                tagName='h2'
+                                className='display-6 mb-5'
+                                placeholder='Agrega un título a esta sección'
+                                value={ title }
+                                onChange={ onChangeTitle }
+                            />
                         </div>
                         <div className="row g-4 justify-content-center">
                             {
@@ -113,7 +131,7 @@ const Edit = ( props ) => {
                                     return (
                                         <div className="col-lg-4 col-md-6 wow fadeInUp" key={ post.id }>
                                             <div className="service-item">
-                                                <img className="img-fluid" src={ post.featured_image_src } alt=""/>
+                                                <img className="img-fluid" src={ post.featured_image_src }/>
                                                 <div className="d-flex align-items-center bg-light">
                                                     <div className="service-icon flex-shrink-0 bg-primary">
                                                     </div>

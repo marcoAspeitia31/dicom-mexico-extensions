@@ -38,13 +38,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const Edit = props => {
   const {
-    attributes,
+    attributes: {
+      category,
+      per_page,
+      title
+    },
     setAttributes
-  } = props;
-  const {
-    category,
-    per_page
-  } = attributes;
+  } = props; //const { category, per_page } = attributes
+
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   /**
    * useState Returns a stateful value, and a function to update it.
@@ -110,6 +111,28 @@ const Edit = props => {
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     fetchPosts();
   }, [category, per_page]);
+  /**
+   * Register onChange events
+   */
+
+  const onChangeCategory = newCategory => {
+    setAttributes({
+      category: newCategory
+    });
+  };
+
+  const onChangePagePerPosts = newPerPage => {
+    setAttributes({
+      per_page: newPerPage
+    });
+  };
+
+  const onChangeTitle = newTitle => {
+    setAttributes({
+      title: newTitle
+    });
+  };
+
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Categories', 'dicom-mexico-extensions'),
     initialOpen: true
@@ -117,9 +140,7 @@ const Edit = props => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current category', 'dicom-mexico-extensions'),
     value: category || 0,
     options: categories,
-    onChange: newCategory => setAttributes({
-      category: newCategory
-    })
+    onChange: onChangeCategory
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Posts per page', 'dicom-mexico-extensions'),
     initialOpen: true
@@ -127,9 +148,8 @@ const Edit = props => {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current post per page value', 'dicom-mexico-extensions'),
     type: "number",
     value: per_page,
-    onChange: newPerPage => setAttributes({
-      per_page: newPerPage
-    }),
+    onChange: onChangePagePerPosts,
+    min: 1,
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose the number of posts to render', 'dicom-mexico-extensions')
   })))), posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container-xxl py-5"
@@ -137,9 +157,13 @@ const Edit = props => {
     className: "container"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "text-center mx-auto wow fadeInUp"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h2", {
-    className: "display-6 mb-5"
-  }, "\xDAltimas noticias")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+    tagName: "h2",
+    className: "display-6 mb-5",
+    placeholder: "Agrega un t\xEDtulo a esta secci\xF3n",
+    value: title,
+    onChange: onChangeTitle
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row g-4 justify-content-center"
   }, posts.map(post => {
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -149,8 +173,7 @@ const Edit = props => {
       className: "service-item"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       className: "img-fluid",
-      src: post.featured_image_src,
-      alt: ""
+      src: post.featured_image_src
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "d-flex align-items-center bg-light"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -232,7 +255,7 @@ module.exports = window["wp"]["i18n"];
   \*************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","attributes":{"category":{"type":"integer"},"per_page":{"type":"integer","default":10}},"editorScript":"file:./build/index.js"}');
+module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","attributes":{"title":{"type":"string","selector":"h2"},"category":{"type":"integer"},"per_page":{"type":"integer","default":10}},"editorScript":"file:./build/index.js"}');
 
 /***/ })
 
