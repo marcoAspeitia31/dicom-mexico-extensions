@@ -207,7 +207,7 @@ class Dicom_Mexico_Extensions_Admin {
 	 * @link	https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/
 	 */
 
-	function dme_news_dynamic_block_init() {
+	public function dme_news_dynamic_block_init() {
 		register_block_type( 
 			$this->admin_path . 'blocks/news',
 			array(
@@ -217,7 +217,7 @@ class Dicom_Mexico_Extensions_Admin {
 	}
 
 	// Database query to render in the frontend
-	function dme_news_render_callback( $block_attributes, $block_content ) {
+	public function dme_news_render_callback( $block_attributes, $block_content ) {
 
 		$block_classes = isset( $block_attributes['className'] ) ? $block_attributes[ 'className' ] . 'wp-block-plz-news' : 'wp-block-plz-news';
 		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
