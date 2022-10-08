@@ -80,6 +80,7 @@ const Edit = props => {
   }, "\xDAltimas noticias")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row g-4 justify-content-center"
   }, posts.map(post => {
+    console.log(post);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "col-lg-4 col-md-6 wow fadeInUp",
       key: post.id
@@ -87,7 +88,7 @@ const Edit = props => {
       className: "service-item"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       className: "img-fluid",
-      src: _img_service_1_jpg__WEBPACK_IMPORTED_MODULE_3__,
+      src: post.featured_image_src,
       alt: ""
     }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "d-flex align-items-center bg-light"

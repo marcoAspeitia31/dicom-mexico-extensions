@@ -61,10 +61,11 @@ const Edit = ( props ) => {
                         <div className="row g-4 justify-content-center">
                             {
                                 posts.map( ( post ) => {
+                                    console.log(post)
                                     return (
                                         <div className="col-lg-4 col-md-6 wow fadeInUp" key={ post.id }>
                                             <div className="service-item">
-                                                <img className="img-fluid" src={featuredImage} alt=""/>
+                                                <img className="img-fluid" src={ post.featured_image_src } alt=""/>
                                                 <div className="d-flex align-items-center bg-light">
                                                     <div className="service-icon flex-shrink-0 bg-primary">
                                                     </div>
