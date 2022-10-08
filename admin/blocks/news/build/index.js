@@ -38,13 +38,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const Edit = props => {
   const {
-    attributes: {
-      category,
-      per_page,
-      order
-    },
+    attributes,
     setAttributes
   } = props;
+  const {
+    category,
+    per_page
+  } = attributes;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   /**
    * useState Returns a stateful value, and a function to update it.

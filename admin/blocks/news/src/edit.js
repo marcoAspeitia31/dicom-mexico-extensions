@@ -16,14 +16,8 @@ import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
 
-    const {
-        attributes:{
-            category,
-            per_page,
-            order
-        },
-        setAttributes
-    } = props
+    const { attributes, setAttributes } = props
+    const { category, per_page } = attributes
     const blockProps = useBlockProps()
     /**
      * useState Returns a stateful value, and a function to update it.
