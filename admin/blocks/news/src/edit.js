@@ -10,7 +10,6 @@
 import { useBlockProps } from '@wordpress/block-editor'
 import apiFetch from '@wordpress/api-fetch'
 import { useState, useEffect } from '@wordpress/element'
-import featuredImage from '../../img/service-1.jpg'
 
 const Edit = ( props ) => {
 
@@ -34,7 +33,7 @@ const Edit = ( props ) => {
      * @link https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
      */
     const fetchPosts = async () => {
-        let path = '/wp/v2/posts'
+        let path = '/wp/v2/posts?per_page=6'
         const newPosts = await apiFetch( { path } )
         setPosts( newPosts )
     }
@@ -86,23 +85,3 @@ const Edit = ( props ) => {
 }
 
 export default Edit
-
-/* 
-
-
-
-    <div { ...blockProps }>
-            <h2>Últimas entradas</h2>
-            <ul className='posts'>
-                {
-                    posts.map( ( post ) => {
-                        return (
-                            <li key={ post.id }>
-                                <a href={ post.link }>{ post.title.rendered }</a>
-                            </li>
-                        )
-                    } )
-                }
-            </ul>
-        </div>
-*/

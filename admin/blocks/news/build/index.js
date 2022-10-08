@@ -15,7 +15,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _img_service_1_jpg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../img/service-1.jpg */ "./img/service-1.jpg");
 
 
 /**
@@ -26,7 +25,6 @@ __webpack_require__.r(__webpack_exports__);
  * @link https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/
  * @sice 1.0.0
  */
-
 
 
 
@@ -53,7 +51,7 @@ const Edit = props => {
    */
 
   const fetchPosts = async () => {
-    let path = '/wp/v2/posts';
+    let path = '/wp/v2/posts?per_page=6';
     const newPosts = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
       path
     });
@@ -102,35 +100,6 @@ const Edit = props => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Edit);
-/* 
-
-
-
-    <div { ...blockProps }>
-            <h2>Últimas entradas</h2>
-            <ul className='posts'>
-                {
-                    posts.map( ( post ) => {
-                        return (
-                            <li key={ post.id }>
-                                <a href={ post.link }>{ post.title.rendered }</a>
-                            </li>
-                        )
-                    } )
-                }
-            </ul>
-        </div>
-*/
-
-/***/ }),
-
-/***/ "./img/service-1.jpg":
-/*!***************************!*\
-  !*** ./img/service-1.jpg ***!
-  \***************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "images/service-1.620116ab.jpg";
 
 /***/ }),
 
@@ -235,18 +204,6 @@ module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/new
 /******/ 		};
 /******/ 	}();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	!function() {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	}();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	!function() {
 /******/ 		__webpack_require__.o = function(obj, prop) { return Object.prototype.hasOwnProperty.call(obj, prop); }
@@ -261,26 +218,6 @@ module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/new
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	!function() {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	}();
 /******/ 	
 /************************************************************************/

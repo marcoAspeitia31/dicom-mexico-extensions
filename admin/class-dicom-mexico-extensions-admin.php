@@ -54,9 +54,10 @@ class Dicom_Mexico_Extensions_Admin {
 
 		$this->blocks_assets = $blocks_assets;
 
-		$this->plugin_path = plugin_dir_path( dirname( __FILE__ ) );
+		$this->admin_path = plugin_dir_path( __FILE__ );
 
 		add_action( 'init', array( $this, 'dme_register_blocks') );
+		add_action( 'init', array( $this, 'dme_news_dynamic_block_init' ) );
 
 		add_filter( 'block_categories_all', array( $this, 'dme_new_block_category'), 10 , 2 );
 
@@ -197,6 +198,29 @@ class Dicom_Mexico_Extensions_Admin {
 			$this->version,
 			'all'
 		);
+	}
+
+	/**
+	 * Register a dynamic gutenberg block
+	 * 
+	 * @since	1.0.0
+	 * @link	https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/
+	 */
+
+	function dme_news_dynamic_block_init() {
+		register_block_type( 
+			$this->admin_path . 'blocks/news',
+			array(
+				'render_callback'=> array( $this, 'dme_news_render_callback' )
+			)
+		);
+	}
+
+	// Database query to render in the frontend
+	function dme_news_render_callback( $block_attributes, $block_content ) {
+		$return = '<p class=wp-block-plz-news>Hola</p>';
+
+		return $return;
 	}
 
 	/**
