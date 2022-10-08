@@ -10,9 +10,20 @@
 import { useBlockProps } from '@wordpress/block-editor'
 import apiFetch from '@wordpress/api-fetch'
 import { useState, useEffect } from '@wordpress/element'
+import { InspectorControls } from '@wordpress/block-editor'
+import { Panel, PanelBody, SelectControl, TextControl } from '@wordpress/components'
+import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
 
+    const {
+        attributes:{
+            category,
+            per_page,
+            order
+        },
+        setAttributes
+    } = props
     const blockProps = useBlockProps()
     /**
      * useState Returns a stateful value, and a function to update it.
@@ -27,15 +38,32 @@ const Edit = ( props ) => {
      * @since 1.0.0
      */
     const [ posts, setPosts ] = useState( [] )
+    const [ categories, setCategories ] = useState( [] )
 
     /**
      * Utility to make WordPress REST API requests
      * @link https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
      */
     const fetchPosts = async () => {
-        let path = '/wp/v2/posts?per_page=6'
+        let path = `/wp/v2/posts?per_page=${per_page}`
+        if( category && category !=0 ) {
+            path =  `${path}&categories=${category}`
+        }
         const newPosts = await apiFetch( { path } )
         setPosts( newPosts )
+    }
+    const fetchCategories = async () => {
+        const path = '/wp/v2/categories?hide_empty=true'
+        const newCategories = await apiFetch( { path } )
+        // Get the properties that we need to render and save in DDBB
+        let filterCategories = [{label: 'All categories', value: 0}]
+        filterCategories= filterCategories.concat(newCategories.map( ( currentCategory ) => {
+            return {
+                label: currentCategory.name,
+                value: currentCategory.id
+            }
+        } ) )
+        setCategories( filterCategories )
     }
 
     /**
@@ -44,11 +72,39 @@ const Edit = ( props ) => {
      * @link https://reactjs.org/docs/hooks-reference.html#useeffect
      */
     useEffect( () => {
-        fetchPosts()
+        fetchCategories()
     }, [] )
+
+    useEffect( () => {
+        fetchPosts()
+    }, [category, per_page] )
     
     return (
         <>
+        {
+            categories.length > 0 &&
+            <InspectorControls>
+                <Panel>
+                    <PanelBody title={ __( 'Categories', 'dicom-mexico-extensions' ) } initialOpen={true}>
+                        <SelectControl
+                            label={ __( 'Current category', 'dicom-mexico-extensions' ) }
+                            value={ category || 0 }
+                            options={ categories }
+                            onChange={ (newCategory) => setAttributes( { category: newCategory } ) }
+                        />
+                    </PanelBody>
+                    <PanelBody title={ __( 'Posts per page', 'dicom-mexico-extensions' ) } initialOpen={true}>
+                        <TextControl                                
+                            label={ __( 'Current post per page value', 'dicom-mexico-extensions' ) }
+                            type='number'
+                            value={ per_page }
+                            onChange={ ( newPerPage ) => setAttributes( { per_page: newPerPage } ) }
+                            help={ __( 'Choose the number of posts to render', 'dicom-mexico-extensions' ) }
+                        />
+                    </PanelBody>
+                </Panel>
+            </InspectorControls>
+        }
         {
             posts.length > 0 && 
             <div { ...blockProps }>
@@ -60,7 +116,6 @@ const Edit = ( props ) => {
                         <div className="row g-4 justify-content-center">
                             {
                                 posts.map( ( post ) => {
-                                    console.log(post)
                                     return (
                                         <div className="col-lg-4 col-md-6 wow fadeInUp" key={ post.id }>
                                             <div className="service-item">

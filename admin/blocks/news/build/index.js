@@ -15,6 +15,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/api-fetch */ "@wordpress/api-fetch");
 /* harmony import */ var _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
 
 
 /**
@@ -29,7 +33,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 const Edit = props => {
+  const {
+    attributes: {
+      category,
+      per_page,
+      order
+    },
+    setAttributes
+  } = props;
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)();
   /**
    * useState Returns a stateful value, and a function to update it.
@@ -45,17 +60,42 @@ const Edit = props => {
    */
 
   const [posts, setPosts] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
+  const [categories, setCategories] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useState)([]);
   /**
    * Utility to make WordPress REST API requests
    * @link https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
    */
 
   const fetchPosts = async () => {
-    let path = '/wp/v2/posts?per_page=6';
+    let path = `/wp/v2/posts?per_page=${per_page}`;
+
+    if (category && category != 0) {
+      path = `${path}&categories=${category}`;
+    }
+
     const newPosts = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
       path
     });
     setPosts(newPosts);
+  };
+
+  const fetchCategories = async () => {
+    const path = '/wp/v2/categories?hide_empty=true';
+    const newCategories = await _wordpress_api_fetch__WEBPACK_IMPORTED_MODULE_2___default()({
+      path
+    }); // Get the properties that we need to render and save in DDBB
+
+    let filterCategories = [{
+      label: 'All categories',
+      value: 0
+    }];
+    filterCategories = filterCategories.concat(newCategories.map(currentCategory => {
+      return {
+        label: currentCategory.name,
+        value: currentCategory.id
+      };
+    }));
+    setCategories(filterCategories);
   };
   /**
    * The function passed to useEffect may return a clean-up function
@@ -65,9 +105,33 @@ const Edit = props => {
 
 
   (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    fetchPosts();
+    fetchCategories();
   }, []);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    fetchPosts();
+  }, [category, per_page]);
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, categories.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Categories', 'dicom-mexico-extensions'),
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current category', 'dicom-mexico-extensions'),
+    value: category || 0,
+    options: categories,
+    onChange: newCategory => setAttributes({
+      category: newCategory
+    })
+  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+    title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Posts per page', 'dicom-mexico-extensions'),
+    initialOpen: true
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+    label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current post per page value', 'dicom-mexico-extensions'),
+    type: "number",
+    value: per_page,
+    onChange: newPerPage => setAttributes({
+      per_page: newPerPage
+    }),
+    help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose the number of posts to render', 'dicom-mexico-extensions')
+  })))), posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container-xxl py-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container"
@@ -78,7 +142,6 @@ const Edit = props => {
   }, "\xDAltimas noticias")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row g-4 justify-content-center"
   }, posts.map(post => {
-    console.log(post);
     return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "col-lg-4 col-md-6 wow fadeInUp",
       key: post.id
@@ -133,6 +196,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
 /***/ "@wordpress/element":
 /*!*********************************!*\
   !*** external ["wp","element"] ***!
@@ -143,13 +216,23 @@ module.exports = window["wp"]["element"];
 
 /***/ }),
 
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ (function(module) {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
 /***/ "./news/block.json":
 /*!*************************!*\
   !*** ./news/block.json ***!
   \*************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","editorScript":"file:./build/index.js"}');
+module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","attributes":{"category":{"type":"integer"},"per_page":{"type":"integer","default":10}},"editorScript":"file:./build/index.js"}');
 
 /***/ })
 
