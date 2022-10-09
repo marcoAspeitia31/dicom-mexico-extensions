@@ -14,7 +14,8 @@
             "selector": "h2"
         },
         "category": {
-            "type": "integer"
+            "type": "integer",
+            "value": 0
         },
         "per_page": {
             "type": "integer",

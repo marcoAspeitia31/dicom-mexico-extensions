@@ -138,18 +138,18 @@ const Edit = props => {
     initialOpen: true
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current category', 'dicom-mexico-extensions'),
-    value: category || 0,
+    value: category,
     options: categories,
     onChange: onChangeCategory
   })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
     title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Posts per page', 'dicom-mexico-extensions'),
     initialOpen: true
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
     label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Current post per page value', 'dicom-mexico-extensions'),
-    type: "number",
     value: per_page,
     onChange: onChangePagePerPosts,
     min: 1,
+    max: 10,
     help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__.__)('Choose the number of posts to render', 'dicom-mexico-extensions')
   })))), posts.length > 0 && (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "container-xxl py-5"
@@ -255,7 +255,7 @@ module.exports = window["wp"]["i18n"];
   \*************************/
 /***/ (function(module) {
 
-module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","attributes":{"title":{"type":"string","selector":"h2"},"category":{"type":"integer"},"per_page":{"type":"integer","default":10}},"editorScript":"file:./build/index.js"}');
+module.exports = JSON.parse('{"apiVersion":2,"name":"dicom-mexico-extensions/news","title":"News","category":"dicom-blocks","icon":"list-view","description":"Show news","keywords":["posts","news","dicom"],"version":"0.0.1","textdomain":"dicom-mexico-extensions","attributes":{"title":{"type":"string","selector":"h2"},"category":{"type":"integer","value":0},"per_page":{"type":"integer","default":10}},"editorScript":"file:./build/index.js"}');
 
 /***/ })
 

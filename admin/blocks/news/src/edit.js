@@ -11,7 +11,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor'
 import apiFetch from '@wordpress/api-fetch'
 import { useState, useEffect } from '@wordpress/element'
 import { InspectorControls } from '@wordpress/block-editor'
-import { Panel, PanelBody, SelectControl, TextControl } from '@wordpress/components'
+import { Panel, PanelBody, SelectControl, RangeControl } from '@wordpress/components'
 import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
@@ -93,18 +93,18 @@ const Edit = ( props ) => {
                     <PanelBody title={ __( 'Categories', 'dicom-mexico-extensions' ) } initialOpen={true}>
                         <SelectControl
                             label={ __( 'Current category', 'dicom-mexico-extensions' ) }
-                            value={ category || 0 }
+                            value={ category }
                             options={ categories }
                             onChange={ onChangeCategory }
                         />
                     </PanelBody>
                     <PanelBody title={ __( 'Posts per page', 'dicom-mexico-extensions' ) } initialOpen={true}>
-                        <TextControl                                
+                        <RangeControl
                             label={ __( 'Current post per page value', 'dicom-mexico-extensions' ) }
-                            type='number'
                             value={ per_page }
                             onChange={ onChangePagePerPosts }
                             min={1}
+                            max={10}
                             help={ __( 'Choose the number of posts to render', 'dicom-mexico-extensions' ) }
                         />
                     </PanelBody>

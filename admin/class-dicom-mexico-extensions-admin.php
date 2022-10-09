@@ -219,7 +219,7 @@ class Dicom_Mexico_Extensions_Admin {
 	// Database query to render in the frontend
 	public function dme_news_render_callback( $block_attributes, $block_content ) {
 
-		$block_classes = isset( $block_attributes['className'] ) ? $block_attributes[ 'className' ] . 'wp-block-plz-news' : 'wp-block-plz-news';
+		$block_classes = isset( $block_attributes['className'] ) ? $block_attributes[ 'className' ] . 'wp-block-dme-news' : 'wp-block-dme-news';
 		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
 
 		$args = array(
