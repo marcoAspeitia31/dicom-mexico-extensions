@@ -54,13 +54,16 @@ class Dicom_Mexico_Extensions_Admin {
 
 		$this->blocks_assets = $blocks_assets;
 
-		$this->plugin_path = plugin_dir_path( dirname( __FILE__ ) );
+		$this->admin_path = plugin_dir_path( __FILE__ );
 
 		add_action( 'init', array( $this, 'dme_register_blocks') );
+		add_action( 'init', array( $this, 'dme_news_dynamic_block_init' ) );
 
 		add_filter( 'block_categories_all', array( $this, 'dme_new_block_category'), 10 , 2 );
 
 		add_action( 'enqueue_block_editor_assets', array( $this, 'dme_blocks_enqueue_scripts' ) );
+
+		add_action( 'rest_api_init', array( $this, 'dme_posts_featured_media_api' ) );
 
 	}
 
@@ -195,6 +198,61 @@ class Dicom_Mexico_Extensions_Admin {
 			$this->version,
 			'all'
 		);
+	}
+
+	/**
+	 * Register a dynamic gutenberg block
+	 * 
+	 * @since	1.0.0
+	 * @link	https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/
+	 */
+
+	function dme_news_dynamic_block_init() {
+		register_block_type( 
+			$this->admin_path . 'blocks/news',
+			array(
+				'render_callback'=> array( $this, 'dme_news_render_callback' )
+			)
+		);
+	}
+
+	// Database query to render in the frontend
+	function dme_news_render_callback( $block_attributes, $block_content ) {
+		$return = '<p class=wp-block-plz-news>Hola</p>';
+
+		return $return;
+	}
+
+	/**
+	 * Register custom featured image field to WP REST API
+	 * 
+	 * @link https://developer.wordpress.org/reference/functions/register_rest_field/
+	 * @since 1.0.0
+	 */
+	public function dme_posts_featured_media_api() {
+
+		$field = 'featured_image_src';
+
+		register_rest_field( 
+			array( 'post' ),
+			$field,
+			array(
+				'get_callback'		=> array( $this, 'dme_get_post_featured_image'),
+				'update_callback' 	=> null,
+				'schema'			=> null,
+			)
+		);
+	}
+
+	public function dme_get_post_featured_image( $object ) {
+		if( $object['featured_media'] ){
+			//Get the image URL
+			$field = wp_get_attachment_image_src( $object['featured_media'], 'large', false );
+
+			//returns the URL
+			return $field[0];
+		}
+		return false;
 	}
 
 }
