@@ -113,11 +113,17 @@ class Dicom_Mexico_Extensions {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dicom-mexico-extensions-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cmb2-functions.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dicom-mexico-extensions-admin.php';
+
+		/**
+		 * This section is responsible to add the CMB2 Metaboxes
+		 */
+		//require_once plugin_dir_path( dirname( __FILE__ ) ) . ''
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
