@@ -227,7 +227,13 @@ class Dicom_Mexico_Extensions_Admin {
 		);
 
 		if( isset( $block_attributes['category'] ) ) {
-			$args['category'] = $block_attributes['category'];
+			$args['tax_query'] = array(
+                array(
+                    'taxonomy'  => 'category',
+                    'field'     => 'term_id',
+                    'terms'     => $block_attributes['category'], //
+                )
+            );
 		}
 
 		$posts = new WP_Query( $args );
@@ -264,6 +270,7 @@ class Dicom_Mexico_Extensions_Admin {
 		}
 
 		wp_reset_postdata( );
+
 		return $render;
 	}
 

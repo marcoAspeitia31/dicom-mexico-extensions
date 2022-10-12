@@ -15,7 +15,7 @@
         },
         "category": {
             "type": "integer",
-            "value": 0
+            "default": 0
         },
         "per_page": {
             "type": "integer",
