@@ -30,6 +30,8 @@
 }
 
 /*======= CMB2 POST FIELDS ========*/
+
+/* Image icon with rest */
 #dme_posts_metabox_fields .postbox-header {
    padding: 16px 0px 16px 16px;
 }
@@ -38,4 +40,9 @@
    padding: 0;
    font-weight: 500;
    font-size: 1rem;
+}
+
+#dme_posts_metabox_fields .postbox-header .handle-order-higher,
+#dme_posts_metabox_fields .postbox-header .handle-order-lower {
+   display: none;
 }
