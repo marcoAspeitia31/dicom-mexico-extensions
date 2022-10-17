@@ -6,7 +6,7 @@
  * @since 1.0.0
  */
 
-add_action( 'cmb2_admin_init', 'dme_posts_metabox' );
+add_action( 'cmb2_init', 'dme_posts_metabox' );
 function dme_posts_metabox() {
 
     $prefix = 'dme_posts_metabox_';
@@ -18,6 +18,7 @@ function dme_posts_metabox() {
 		'context'      => 'side',
 		'priority'     => 'high',
 		'show_names'   => true,
+		'show_in_rest' => WP_REST_Server::ALLMETHODS, // WP_REST_Server::READABLE|WP_REST_Server::EDITABLE, // Determines which HTTP methods the box is visible in.
 	) );
 
 	$dme_posts->add_field( array(

@@ -28,3 +28,14 @@
 .wp-core-ui select {
    font-size: 1rem !important;
 }
+
+/*======= CMB2 POST FIELDS ========*/
+#dme_posts_metabox_fields .postbox-header {
+   padding: 16px 0px 16px 16px;
+}
+
+#dme_posts_metabox_fields .postbox-header .hndle.ui-sortable-handle {
+   padding: 0;
+   font-weight: 500;
+   font-size: 1rem;
+}
