@@ -14,12 +14,10 @@
             "selector": "h2"
         },
         "category": {
-            "type": "integer",
-            "default": 0
+            "type": "integer"
         },
         "per_page": {
-            "type": "integer",
-            "default": 10
+            "type": "integer"
         }
     },
     "editorScript": "file:./build/index.js"

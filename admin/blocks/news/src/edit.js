@@ -16,8 +16,8 @@ import { __ } from '@wordpress/i18n';
 
 const Edit = ( props ) => {
 
-    const { attributes: {category, per_page, title}, setAttributes } = props
-    //const { category, per_page } = attributes
+    const { attributes: { category, per_page, title }, setAttributes } = props
+    //const { category, per_page, title } = attributes
     const blockProps = useBlockProps()
     /**
      * useState Returns a stateful value, and a function to update it.
@@ -39,7 +39,10 @@ const Edit = ( props ) => {
      * @link https://developer.wordpress.org/block-editor/reference-guides/packages/packages-api-fetch/
      */
     const fetchPosts = async () => {
-        let path = `/wp/v2/posts?per_page=${per_page}`
+        if( per_page === undefined ){
+            setAttributes( { per_page: 6 } )
+        }
+        let path = per_page === undefined ? '/wp/v2/posts?per_page=6' : `/wp/v2/posts?per_page=${per_page}`
         if( category && category !=0 ) {
             path =  `${path}&categories=${category}`
         }
@@ -50,8 +53,8 @@ const Edit = ( props ) => {
         const path = '/wp/v2/categories?hide_empty=true'
         const newCategories = await apiFetch( { path } )
         // Get the properties that we need to render and save in DDBB
-        let filterCategories = [{label: 'All categories', value: 0}]
-        filterCategories= filterCategories.concat(newCategories.map( ( currentCategory ) => {
+        const allCategories = [ { label: 'All categories', value: 0 } ]
+        const filterCategories = allCategories.concat(newCategories.map( ( currentCategory ) => {
             return {
                 label: currentCategory.name,
                 value: currentCategory.id
@@ -97,6 +100,7 @@ const Edit = ( props ) => {
                             options={ categories }
                             onChange={ onChangeCategory }
                         />
+                        
                     </PanelBody>
                     <PanelBody title={ __( 'Posts per page', 'dicom-mexico-extensions' ) } initialOpen={true}>
                         <RangeControl

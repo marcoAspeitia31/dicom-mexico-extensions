@@ -226,7 +226,7 @@ class Dicom_Mexico_Extensions_Admin {
 			'posts_per_page' => $block_attributes['per_page']
 		);
 
-		if( isset( $block_attributes['category'] ) ) {
+		if( isset( $block_attributes['category'] ) && $block_attributes['category'] != 0 ) {
 			$args['tax_query'] = array(
                 array(
                     'taxonomy'  => 'category',
