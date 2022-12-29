@@ -250,11 +250,13 @@ class Dicom_Mexico_Extensions_Admin {
 						$render .= '<div class="row g-4 justify-content-center">';
 							while( $posts->have_posts( ) ){
 								$posts->the_post( );
+								$iconNews = get_post_meta( get_the_ID(  ), 'dme_posts_metabox_icon_image_loop', true );
 								$render.= '<div class="col-lg-4 col-md-6 wow fadeInUp">';
 									$render .= '<div class="service-item">';
 										$render .= get_the_post_thumbnail( get_the_ID(), 'services-thumb' );
 										$render .= '<div class="d-flex align-items-center bg-light">';
 											$render .= '<div class="service-icon flex-shrink-0 bg-primary">';
+											$render .= '<img class="img-fluid" src=' . esc_url( $iconNews ) . '></img>';
 											$render .= '</div>';
 											$render .= '<a class="h4 mx-4 mb-0" href=' . get_the_permalink( get_the_ID() ) . '>';
 											$render .= get_the_title( get_the_ID( ) );

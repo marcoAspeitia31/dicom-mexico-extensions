@@ -184,7 +184,10 @@ const Edit = props => {
       className: "d-flex align-items-center bg-light"
     }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       className: "service-icon flex-shrink-0 bg-primary"
-    }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
+    }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+      className: "img-fluid",
+      src: post.cmb2.dme_posts_metabox_fields.dme_posts_metabox_icon_image_loop
+    })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("a", {
       className: "h4 mx-4 mb-0",
       href: post.link
     }, post.title.rendered))));

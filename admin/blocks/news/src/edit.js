@@ -138,6 +138,7 @@ const Edit = ( props ) => {
                                                 <img className="img-fluid" src={ post.featured_image_src }/>
                                                 <div className="d-flex align-items-center bg-light">
                                                     <div className="service-icon flex-shrink-0 bg-primary">
+                                                    <img className="img-fluid" src={ post.cmb2.dme_posts_metabox_fields.dme_posts_metabox_icon_image_loop }/>
                                                     </div>
                                                     <a className="h4 mx-4 mb-0" href={ post.link }>{ post.title.rendered }</a>
                                                 </div>
