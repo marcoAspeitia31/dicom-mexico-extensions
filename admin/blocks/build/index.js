@@ -30,7 +30,8 @@ const Edit = props => {
       imageTwoAlt,
       subtitleOne,
       subtitleTwo,
-      featuredSectionImage
+      featuredSectionImage,
+      featuredSectionImageAlt
     },
     setAttributes,
     className
@@ -68,7 +69,8 @@ const Edit = props => {
 
   const onSelectFeaturedSectionImage = newFeaturedSectionImage => {
     setAttributes({
-      featuredSectionImage: newFeaturedSectionImage.sizes.full.url
+      featuredSectionImage: newFeaturedSectionImage.sizes.full.url,
+      featuredSectionImageAlt: newFeaturedSectionImage.alt
     });
   };
 
@@ -151,34 +153,12 @@ const Edit = props => {
     placeholder: "Agregar el contenido de esta secci\xF3n",
     value: sectionContent,
     onChange: onChangeContent
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "border-top mt-4 pt-4"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "row"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "col-sm-6"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "d-flex align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "btn-lg-square bg-primary rounded-circle me-3"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    class: "fa fa-phone-alt text-white"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
-    class: "mb-0"
-  }, "+012 345 6789"))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "col-sm-6"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "d-flex align-items-center"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    class: "btn-lg-square bg-primary rounded-circle me-3"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("i", {
-    class: "fa fa-envelope text-white"
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h5", {
-    class: "mb-0"
-  }, "info@example.com"))))))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "col-lg-6"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    src: featuredSectionImage
+    className: "main-image img-fluid",
+    src: featuredSectionImage,
+    alt: featuredSectionImageAlt
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
     type: "image",
     onSelect: onSelectFeaturedSectionImage,
@@ -247,12 +227,14 @@ __webpack_require__.r(__webpack_exports__);
     imageOneUrl: {
       type: 'string',
       default: _img_icon_icon_09_primary_png__WEBPACK_IMPORTED_MODULE_4__,
-      selector: 'img .img1'
+      selector: 'img .img1',
+      attribute: 'src'
     },
     imageOneAlt: {
       type: 'string',
       default: 'Texto alternativo imagen 1',
-      selector: 'img .img1'
+      selector: 'img .img1',
+      attribute: 'alt'
     },
     subtitleOne: {
       type: 'string',
@@ -277,7 +259,14 @@ __webpack_require__.r(__webpack_exports__);
     featuredSectionImage: {
       type: 'string',
       default: _img_about_2_jpg__WEBPACK_IMPORTED_MODULE_6__,
-      selector: 'img'
+      selector: 'img.main-image',
+      attribute: 'src'
+    },
+    featuredSectionImageAlt: {
+      type: 'string',
+      default: 'Texto alternativo imagen 1',
+      selector: 'img.main-image',
+      attribute: 'alt'
     }
   },
   //Wordpress gutenberg editor
@@ -313,7 +302,8 @@ const Save = props => {
       imageTwoAlt,
       subtitleOne,
       subtitleTwo,
-      featuredSectionImage
+      featuredSectionImage,
+      featuredSectionImageAlt
     }
   } = props;
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -365,8 +355,9 @@ const Save = props => {
     className: "col-lg-6 wow fadeInUp",
     "data-wow-delay": "0.5s"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
-    className: "img-fluid",
-    src: featuredSectionImage
+    className: "img-fluid main-image",
+    src: featuredSectionImage,
+    alt: featuredSectionImageAlt
   })))));
 };
 

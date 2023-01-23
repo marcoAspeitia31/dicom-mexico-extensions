@@ -30,12 +30,14 @@ registerBlockType("dicom-mexico-extensions/about", {
         imageOneUrl: {
             type: 'string',
             default: image1,
-            selector: 'img .img1'
+            selector: 'img .img1',
+            attribute: 'src'
         },
         imageOneAlt: {
             type: 'string',
             default: 'Texto alternativo imagen 1',
-            selector: 'img .img1'
+            selector: 'img .img1',
+            attribute: 'alt'
         },
         subtitleOne: {
             type: 'string',
@@ -60,7 +62,14 @@ registerBlockType("dicom-mexico-extensions/about", {
         featuredSectionImage: {
             type: 'string',
             default: featuredImage,
-            selector: 'img'
+            selector: 'img.main-image',
+            attribute: 'src'
+        },
+        featuredSectionImageAlt: {
+            type: 'string',
+            default: 'Texto alternativo imagen 1',
+            selector: 'img.main-image',
+            attribute: 'alt'
         }
     },
     //Wordpress gutenberg editor
