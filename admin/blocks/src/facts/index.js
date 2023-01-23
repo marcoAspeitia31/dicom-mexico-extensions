@@ -3,10 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 import {registerBlockType} from '@wordpress/blocks'
-import featuredImage from '../../img/feature.jpg'
-import icon1 from '../../img/icon/icon-09-light.png'
 import edit from './edit'
 import save from './save'
+import featuredImage from '../../img/feature.jpg'
+import icon1 from '../../img/icon/icon-09-light.png'
+
 
 
 //Register the block
@@ -21,65 +22,60 @@ registerBlockType("dicom-mexico-extensions/facts", {
             selector: 'h2',
             default: 'Título de la sección'
         },
-        sectionContent: {
+        content: {
             type: 'string',
             source: 'html',
-            selector: 'p',
-            default: 'Contenido de la sección',
+            selector: 'p'
         },
         mainImage: {
             type: 'string',
             default: featuredImage,
-            selector: 'img'
+            selector: 'img',
+            attribute: 'src'
         },
         mainImageAlt: {
             type: 'string',
             default: 'Dicom México una empresa de imageniología médica de clase mundial',
-            selector: 'img .main-image'
+            selector: 'img .main-image',
+            attribute: 'alt'
         },
-        title1: {
+        titleOne: {
             type: 'string',
             source: 'html',
-            selector: 'h5',
-            default: 'Título 1'
+            selector: 'h5.title-one',
         },
-        content1: {
+        contentOne: {
             type: 'string',
             source: 'html',
-            selector: 'p',
-            default: 'Contenido de la sección 1'
+            selector: 'span.content-one',
         },
         icon1: {
             type: 'string',
             default: icon1
         },
-        title2: {
+        titleTwo: {
             type: 'string',
             source: 'html',
-            selector: 'h5',
-            default: 'Título 2'
+            selector: 'h5.title-two',
         },
-        content2: {
+        contentTwo: {
             type: 'string',
             source: 'html',
-            selector: 'p',
-            default: 'Contenido de la sección 2'
+            selector: 'span.content-two',
         },
         icon2: {
             type: 'string',
             default: icon1
         },
-        title3: {
+        titleThree: {
             type: 'string',
             source: 'html',
-            selector: 'h5',
-            default: 'Título 3'
+            selector: 'h5.title-three',
         },
-        content3: {
+        contentThree: {
             type: 'string',
             source: 'html',
-            selector: 'p',
-            default: 'Contenido de la sección 3'
+            selector: 'span.content-three',
         },
         icon3: {
             type: 'string',
@@ -89,5 +85,5 @@ registerBlockType("dicom-mexico-extensions/facts", {
     //Wordpress gutenberg editor
     edit: edit,
     //Frontend result
-    save: () => <h2>Dicom Mexico Facts</h2>
+    save: save,
 } )

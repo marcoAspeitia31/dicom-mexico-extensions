@@ -11,7 +11,7 @@ import featuredImage from '../../img/about-2.jpg'
 
 // Register the block
 registerBlockType("dicom-mexico-extensions/about", {
-    title: __( 'Dicom Mexico About edited', 'dicom-mexico-extensions' ),
+    title: __( 'About', 'dicom-mexico-extensions' ),
     category: "dicom-blocks",
     icon: 'admin-users',
     attributes: {

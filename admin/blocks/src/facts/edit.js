@@ -5,26 +5,26 @@ const Edit = ( props ) => {
     const {
         attributes: {
             title,
-            sectionContent,
+            content,
             mainImage,
             mainImageAlt,
-            title1,
-            content1,
+            titleOne,
+            contentOne,
             icon1,
-            title2,
-            content2,
+            titleTwo,
+            contentTwo,
             icon2,
-            title3,
-            content3,
+            titleThree,
+            contentThree,
             icon3
         },
         setAttributes,
-        classNameNameName
+        className
     } = props
 
     // State functions
     const onChangeTitle = ( newTitle ) => setAttributes( { title: newTitle } )
-    const onChangeSectionContent = ( newSectionContent ) => setAttributes( { sectionContent: newSectionContent } )
+    const onChangeContent = ( newContent ) => setAttributes( { content: newContent } )
     const onSelectMainImage = ( newMainImage ) => {
         setAttributes({
             mainImage: newMainImage.sizes.full.url,
@@ -32,27 +32,27 @@ const Edit = ( props ) => {
         })
     }
     //Section 1
-    const onChangeTitle1 = newTitle1 => setAttributes( { title1: newTitle1 } )
-    const onChangeContent1 = newContent1 => setAttributes( { content1: newContent1 } )
-    const onSelectIcon1 = newIcon1 => {
+    const onChangeTitleOne = ( newTitleOne ) => setAttributes( { titleOne: newTitleOne } )
+    const onChangeContentOne = ( newContentOne ) => setAttributes( { contentOne: newContentOne } )
+    const onSelectIcon1 = ( newIcon1 ) => {
         setAttributes({
-            icon1: newIcon1.sizes.thumbnail
+            icon1: newIcon1.sizes.full.url
         })
     }
     //Section 2
-    const onChangeTitle2 = newTitle2 => setAttributes( { title2: newTitle2 } )
-    const onChangeContent2 = newContent2 => setAttributes( { content2: newContent2 } )
-    const onSelectIcon2 = newIcon2 => {
+    const onChangeTitleTwo = ( newTitleTwo ) => setAttributes( { titleTwo: newTitleTwo } )
+    const onChangeContentTwo = ( newContentTwo ) => setAttributes( { contentTwo: newContentTwo } )
+    const onSelectIcon2 = ( newIcon2 ) => {
         setAttributes({
-            icon2: newIcon2.sizes.thumbnail
+            icon2: newIcon2.sizes.full.url
         })
     }
     //Section 3
-    const onChangeTitle3 = newTitle3 => setAttributes( { title3: newTitle3 } )
-    const onChangeContent3 = newContent3 => setAttributes( { content3: newContent3 } )
-    const onSelectIcon3 = newIcon3 => {
+    const onChangeTitleThree = ( newTitleThree ) => setAttributes( { titleThree: newTitleThree } )
+    const onChangeContentThree = ( newContentThree ) => setAttributes( { contentThree: newContentThree } )
+    const onSelectIcon3 = ( newIcon3 ) => {
         setAttributes({
-            icon3: newIcon3.sizes.thumbnail
+            icon3: newIcon3.sizes.full.url
         })
     }
     return (
@@ -69,11 +69,12 @@ const Edit = ( props ) => {
                         />
                         <RichText
                             tagName='p'
-                            className='mb-5'
-                            placeholder='Agrega el contenido principal a esta sección'
-                            value={ sectionContent }
-                            onChange={ onChangeSectionContent }
+                            className='mb-5 content'
+                            placeholder='Agregar descripción de la sección'
+                            value= { content }
+                            onChange = { onChangeContent }
                         />
+                        
                         <div className="d-flex mb-5">
                             <div className='d-flex flex-column'>
                                 <div className="flex-shrink-0 btn-square bg-primary rounded-circle icon-facts">
@@ -94,17 +95,18 @@ const Edit = ( props ) => {
                             </div>
                             <div className="ms-4">
                                 <RichText
-                                    tagName='h4'
-                                    className='mb-3'
-                                    placeholder='Característica uno'
-                                    value={ title1 }
-                                    onChange={ onChangeTitle1 }
+                                    tagName ='h5'
+                                    className ='mb-3 title-one'
+                                    placeholder ='Agrega un título a este apartado'
+                                    value = { titleOne }
+                                    onChange = { onChangeTitleOne }
                                 />
                                 <RichText
-                                    tagName='span'
-                                    placeholder='Descripción de la característica uno'
-                                    value={ content1 }
-                                    onChange={ onChangeContent1 }
+                                    tagName = 'span'
+                                    className = 'content-one'
+                                    placeholder = 'Descripción sección 1'
+                                    value = { contentOne }
+                                    onChange = { onChangeContentOne }
                                 />
                             </div>
                         </div>
@@ -114,11 +116,11 @@ const Edit = ( props ) => {
                                     <img className="img-fluid" src={icon2} alt=""/>
                                 </div>
                                 <MediaUpload
-                                    type='image'
-                                    onSelect={ onSelectIcon2 }
-                                    render= { ( { open } ) => (
+                                    type = 'image'
+                                    onSelect = { onSelectIcon2 }
+                                    render =  { ( { open } ) => (
                                         <Button
-                                            onClick={ open }
+                                            onClick = { open }
                                             icon = 'format-image'
                                             showTooltip = 'true'
                                             label = 'Seleccionar ícono imagen'                                        
@@ -128,17 +130,18 @@ const Edit = ( props ) => {
                             </div>
                             <div className="ms-4">
                                 <RichText
-                                    tagName='h4'
-                                    className='mb-3'
-                                    placeholder='Característica uno'
-                                    value={ title2 }
-                                    onChange={ onChangeTitle2 }
+                                    tagName = 'h5'
+                                    className = 'mb-3 title-two'
+                                    placeholder = 'Agregar título 2'
+                                    value = { titleTwo }
+                                    onChange = { onChangeTitleTwo }
                                 />
                                 <RichText
-                                    tagName='span'
-                                    placeholder='Descripción de la característica uno'
-                                    value={ content2 }
-                                    onChange={ onChangeContent2 }
+                                    tagName = 'spam'
+                                    className = 'content-two'
+                                    placeholder = 'Agregar descripcion 2'
+                                    value = { contentTwo }
+                                    onChange = { onChangeContentTwo }
                                 />
                             </div>
                         </div>
@@ -162,40 +165,41 @@ const Edit = ( props ) => {
                             </div>
                             <div className="ms-4">
                                 <RichText
-                                    tagName='h4'
-                                    className='mb-3'
-                                    placeholder='Característica uno'
-                                    value={ title3 }
-                                    onChange={ onChangeTitle3 }
+                                    tagName = 'h5'
+                                    className = 'mb-3 title-three'
+                                    placeholder = 'Agregar título 3'
+                                    value = { titleThree }
+                                    onChange = { onChangeTitleThree }
                                 />
                                 <RichText
-                                    tagName='span'
-                                    placeholder='Descripción de la característica uno'
-                                    value={ content3 }
-                                    onChange={ onChangeContent3 }
+                                    tagName = 'spam'
+                                    className = 'content-three'
+                                    placeholder = 'Agregar descripcion 3'
+                                    value = { contentThree }
+                                    onChange = { onChangeContentThree }
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="col-lg-6 wow fadeInUp">
-                    <div className="featured-facts position-relative rounded overflow-hidden h-100">
-                        <img className="position-absolute w-100 h-100 featured-facts-img" src={ mainImage } alt={ mainImageAlt } />
-                        <MediaUpload
-                            type='image'
-                            onSelect={ onSelectMainImage }
-                            render = { ( { open } ) => (
-                                <Button
-                                    onClick={ open }
-                                    icon = 'format-image'
-                                    showTooltip = 'true'
-                                    label = 'Seleccionar imagen'
-                                    text = 'Agregar una imagen de 600 x 630'
-                                    className='position-absolute w-100 h-100 featured-facts-img'
-                                />
-                            ) }
-                        />
+                        <div className="featured-facts position-relative rounded overflow-hidden h-100">
+                            <img className="position-absolute w-100 h-100 featured-facts-img" src={ mainImage } alt={ mainImageAlt } />
+                            <MediaUpload
+                                type='image'
+                                onSelect={ onSelectMainImage }
+                                render = { ( { open } ) => (
+                                    <Button
+                                        onClick={ open }
+                                        icon = 'format-image'
+                                        showTooltip = 'true'
+                                        label = 'Seleccionar imagen'
+                                        text = 'Agregar una imagen de 600 x 630'
+                                        className='position-absolute w-100 h-100 featured-facts-img'
+                                    />
+                                ) }
+                            />
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>
