@@ -138,6 +138,8 @@ class Dicom_Mexico_Extensions_Admin {
 			$this->plugin_name . '/about',
 			$this->plugin_name . '/facts',
 			$this->plugin_name . '/insights',
+			$this->plugin_name . '/right-content',
+			$this->plugin_name . '/lenft-content',
 		);
 
 		foreach( $blocks as $block_type ) {
