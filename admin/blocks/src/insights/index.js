@@ -5,6 +5,8 @@ import { __ } from '@wordpress/i18n'
 import { registerBlockType } from '@wordpress/blocks'
 import edit from './edit'
 import save from './save'
+import bgImage from '../../img/carousel-1.jpg'
+
 
 // Register Block
 registerBlockType("dicom-mexico-extensions/insights", {
@@ -12,6 +14,10 @@ registerBlockType("dicom-mexico-extensions/insights", {
     category: 'dicom-blocks',
     icon: 'star-filled',
     attributes: {
+        image: {
+            type: 'string',
+            selector: 'div.facts'
+        },
         insightNumberOne: {
             type: 'string',
             source: 'html',
