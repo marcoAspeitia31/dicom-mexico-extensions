@@ -137,6 +137,7 @@ class Dicom_Mexico_Extensions_Admin {
 		$blocks = array(
 			$this->plugin_name . '/about',
 			$this->plugin_name . '/facts',
+			$this->plugin_name . '/insights',
 		);
 
 		foreach( $blocks as $block_type ) {

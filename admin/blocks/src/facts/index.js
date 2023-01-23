@@ -80,7 +80,14 @@ registerBlockType("dicom-mexico-extensions/facts", {
         icon3: {
             type: 'string',
             default: icon1
+        },
+        align: {
+            type: 'string',
+            default: 'wide'
         }
+    },
+    supports: {
+        align: ['wide']
     },
     //Wordpress gutenberg editor
     edit: edit,

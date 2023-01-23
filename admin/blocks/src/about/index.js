@@ -70,7 +70,14 @@ registerBlockType("dicom-mexico-extensions/about", {
             default: 'Texto alternativo imagen 1',
             selector: 'img.main-image',
             attribute: 'alt'
+        },
+        align: {
+            type: 'string',
+            default: 'wide'
         }
+    },
+    supports: {
+        align: ['wide']
     },
     //Wordpress gutenberg editor
     edit: edit,

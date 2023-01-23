@@ -267,7 +267,14 @@ __webpack_require__.r(__webpack_exports__);
       default: 'Texto alternativo imagen 1',
       selector: 'img.main-image',
       attribute: 'alt'
+    },
+    align: {
+      type: 'string',
+      default: 'wide'
     }
+  },
+  supports: {
+    align: ['wide']
   },
   //Wordpress gutenberg editor
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -722,7 +729,14 @@ __webpack_require__.r(__webpack_exports__);
     icon3: {
       type: 'string',
       default: _img_icon_icon_09_light_png__WEBPACK_IMPORTED_MODULE_5__
+    },
+    align: {
+      type: 'string',
+      default: 'wide'
     }
+  },
+  supports: {
+    align: ['wide']
   },
   //Wordpress gutenberg editor
   edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -858,6 +872,134 @@ const Save = props => {
     src: mainImage,
     alt: mainImageAlt
   }))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Save);
+
+/***/ }),
+
+/***/ "./src/insights/edit.js":
+/*!******************************!*\
+  !*** ./src/insights/edit.js ***!
+  \******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const Edit = props => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Insights");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Edit);
+
+/***/ }),
+
+/***/ "./src/insights/index.js":
+/*!*******************************!*\
+  !*** ./src/insights/index.js ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/insights/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/insights/save.js");
+/**
+ * Wordpress dependencies
+ */
+
+
+
+ // Register Block
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)("dicom-mexico-extensions/insights", {
+  title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Insights', 'dicom-mexico-extensions'),
+  category: 'dicom-blocks',
+  icon: 'star-filled',
+  attributes: {
+    insightNumberOne: {
+      type: 'string',
+      source: 'html',
+      selector: 'h3.insight-number-one',
+      default: '1234'
+    },
+    insightTitleOne: {
+      type: 'string',
+      source: 'html',
+      selector: 'span.insight-title-one',
+      default: 'Happy clients'
+    },
+    insightNumberTwo: {
+      type: 'string',
+      source: 'html',
+      selector: 'h3.insight-number-two',
+      default: '1234'
+    },
+    insightTitleTwo: {
+      type: 'string',
+      source: 'html',
+      selector: 'span.insight-title-two',
+      default: 'Happy clients'
+    },
+    insightNumberThree: {
+      type: 'string',
+      source: 'html',
+      selector: 'h3.insight-number-three',
+      default: '1234'
+    },
+    insightTitleThree: {
+      type: 'string',
+      source: 'html',
+      selector: 'span.insight-title-three',
+      default: 'Happy clients'
+    },
+    insightNumberFour: {
+      type: 'string',
+      source: 'html',
+      selector: 'h3.insight-number-four',
+      default: '1234'
+    },
+    insightTitleFour: {
+      type: 'string',
+      source: 'html',
+      selector: 'span.insight-title-four',
+      default: 'Happy clients'
+    },
+    align: {
+      type: 'string',
+      default: 'full'
+    }
+  },
+  supports: {
+    align: ['full']
+  },
+  // Wordpress gutenberg editor
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  // Frontend result
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/insights/save.js":
+/*!******************************!*\
+  !*** ./src/insights/save.js ***!
+  \******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const Save = props => {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("h1", null, "Insights");
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Save);
@@ -1102,6 +1244,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _about_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./about/index.js */ "./src/about/index.js");
 /* harmony import */ var _facts_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./facts/index.js */ "./src/facts/index.js");
+/* harmony import */ var _insights_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./insights/index.js */ "./src/insights/index.js");
+
 
 
 }();
