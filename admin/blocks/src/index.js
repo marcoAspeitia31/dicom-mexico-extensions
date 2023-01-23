@@ -1,3 +1,5 @@
 import './about/index.js'
 import './facts/index.js'
 import './insights/index.js'
+import './right-content/index.js'
+import './left-content/index.js'
