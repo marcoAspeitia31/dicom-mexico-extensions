@@ -12,7 +12,8 @@ const Edit = ( props ) => {
             imageTwoAlt,
             subtitleOne,
             subtitleTwo,
-            featuredSectionImage
+            featuredSectionImage,
+            featuredSectionImageAlt
         },
         setAttributes,
         className
@@ -35,7 +36,8 @@ const Edit = ( props ) => {
     const onChangeSubtitleTwo = ( newSubtitleTwo ) => setAttributes( { subtitleTwo: newSubtitleTwo } )
     const onSelectFeaturedSectionImage = ( newFeaturedSectionImage ) => {
         setAttributes( {
-            featuredSectionImage: newFeaturedSectionImage.sizes.full.url
+            featuredSectionImage: newFeaturedSectionImage.sizes.full.url,
+            featuredSectionImageAlt: newFeaturedSectionImage.alt
         } )
     }
     return (
@@ -109,30 +111,10 @@ const Edit = ( props ) => {
                                 value = { sectionContent }
                                 onChange = { onChangeContent }
                             />
-                            <div class="border-top mt-4 pt-4">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="d-flex align-items-center">
-                                            <div class="btn-lg-square bg-primary rounded-circle me-3">
-                                                <i class="fa fa-phone-alt text-white"></i>
-                                            </div>
-                                            <h5 class="mb-0">+012 345 6789</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="d-flex align-items-center">
-                                            <div class="btn-lg-square bg-primary rounded-circle me-3">
-                                                <i class="fa fa-envelope text-white"></i>
-                                            </div>
-                                            <h5 class="mb-0">info@example.com</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div className="col-lg-6">
-                        <img src={ featuredSectionImage } />
+                        <img className="main-image img-fluid" src={ featuredSectionImage } alt={ featuredSectionImageAlt }  />
                         <MediaUpload
                             type = 'image'
                             onSelect={ onSelectFeaturedSectionImage }

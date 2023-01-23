@@ -448,3 +448,15 @@
 .footer .copyright a:hover {
     color: #FFFFFF;
 }
+
+/*** Facts ***/
+.icon-facts {
+    width: 90px;
+    height: 90px;
+}
+.featured-facts {
+    min-height: 400px;
+}
+.featured-facts-img {
+    object-fit: cover;
+}
