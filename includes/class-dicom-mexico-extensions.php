@@ -124,6 +124,7 @@ class Dicom_Mexico_Extensions {
 		 * This section is responsible to add the CMB2 Metaboxes
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/posts-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/dicom-theme-options-fields.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing

@@ -65,6 +65,8 @@ class Dicom_Mexico_Extensions_Admin {
 
 		add_action( 'rest_api_init', array( $this, 'dme_posts_featured_media_api' ) );
 
+		add_action( 'admin_menu', array( $this, 'dme_options_menu_page' ) );
+
 	}
 
 	/**
@@ -309,6 +311,30 @@ class Dicom_Mexico_Extensions_Admin {
 			return $field[0];
 		}
 		return false;
+	}
+
+	/**
+	 * Register wordpress menu page
+	 * 
+	 * @since v1.0.0
+	 * @link https://developer.wordpress.org/reference/functions/add_menu_page/
+	 */
+	public function dme_options_menu_page() {
+
+		add_menu_page( 
+			$this->plugin_name,
+			'Dicom México Theme Options',
+			'manage_options',
+			'dme-options-menu',
+			array( $this, 'display_dme_options_menu_page' ),
+			'dashicons-clipboard',
+			2
+		);
+
+	}
+
+	public function display_dme_options_menu_page() {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/dicom-mexico-extensions-admin-display.php';
 	}
 
 }
