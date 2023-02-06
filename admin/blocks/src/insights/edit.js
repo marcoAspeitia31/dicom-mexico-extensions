@@ -56,43 +56,60 @@ const Edit = ( props ) => {
     }
 
     const parallax = {
+        position:  'absolute',
+        zInex: '-10',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+
         /* The image used */
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${ image })`,
         
         
         /* Create the parallax scrolling effect */
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundColor: 'rgba(1, 10, 53, .8)',
+        backgroundSize: 'cover'
 
-        /* Only apply this in backend */
-        display: 'flex',
-        flexDirection: 'column'
+    }
+    
+    const overlay = {
+        position:  'absolute',
+        zInex: '-5',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        background: 'rgba(1, 10, 53, .8)'
     }
 
     const blockProps = useBlockProps( { style: parallax } );
-
+    const blockPropsOverlay = useBlockProps( { style: overlay } )
 
     return (
-        <div className="container-fluid facts my-5 py-5 display-flex flex-column" { ...blockProps }>
+        <div className="container-fluid facts my-5 py-5 position-relative">
+            <div { ...blockProps } ></div>
+            <div { ...blockPropsOverlay }></div>
 
-            <MediaUpload
-                onSelect={ onSelectImage }
-                type='image'
-                value={image}
-                render={({open})=>(
-                    <Button
-                        onClick={open}
-                        icon='format-image'
-                        showTooltip='true'
-                        label='Elegir imagen de fondo'
-                    />
-                )}
-            />
-
-            <div className="container py-5">
+            <div className="container py-5 position-relative">
+                <MediaUpload
+                    onSelect = { onSelectImage }
+                    type = 'image'
+                    value = { image }
+                    render = { ( { open } ) => (
+                        <Button
+                            onClick={ open }
+                            icon='format-image'
+                            showTooltip='true'
+                            label='Elegir imagen de fondo'
+                            text='Elegir imagen de fondo'
+                            type= 'tertiary'
+                            className='btn btn-primary'
+                        />
+                    ) }
+                />
                 <div className="row g-5">
                     <div className="col-sm-6 col-lg-3 wow fadeIn text-center" data-wow-delay="0.1s">
                         <RichText
