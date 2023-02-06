@@ -83,7 +83,14 @@ const Edit = ( props ) => {
         style: leftOverlay
     }
 
-    const bgLeftImage = {
+    const bgRightImage = {
+        position:  'absolute',
+        zInex: '-10',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+
         /* The image used */
         backgroundImage: `url(${ rightBackgroundImage })`,
 
@@ -96,8 +103,21 @@ const Edit = ( props ) => {
 
     const blockPropsTwo = useBlockProps( {
         className: 'col-lg-6 quote-form',
-        style: bgLeftImage
+        style: bgRightImage
     } )
+
+    const rightOverlay = {
+        position:  'absolute',
+        zInex: '-5',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        content: ' ',
+        background: 'rgba(255,255,255,.8)'
+    }
+
+    const blockPropsRightOverlay = { style: rightOverlay }
 
     return(
         <>
@@ -183,8 +203,11 @@ const Edit = ( props ) => {
                                 />
                             </div>
                         </div>
-                        <div { ...blockPropsTwo } >
-                            <MediaUpload
+                        <div className='col-lg-6 quote-form position-relative' >
+                            <div { ...blockPropsTwo } ></div>
+                            <div { ...blockPropsRightOverlay } ></div>
+                            <div className="position-relative h-100 px-4 px-sm-5 pe-lg-0 wow fadeIn" data-wow-delay="0.5s">
+                                <MediaUpload
                                     onSelect = { onSelectRightBackgroundImage }
                                     value = { rightBackgroundImage }
                                     type = 'image'
@@ -196,8 +219,7 @@ const Edit = ( props ) => {
                                             label = 'Elegir imagen de fondo'
                                         />
                                     ) }
-                            />
-                            <div className="h-100 px-4 px-sm-5 pe-lg-0 wow fadeIn" data-wow-delay="0.5s">
+                                />
                                 <div className="bg-white p-4 p-sm-5">
                                     <div className="row g-3">
                                         <InnerBlocks/>

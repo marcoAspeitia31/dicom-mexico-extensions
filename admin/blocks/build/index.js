@@ -474,7 +474,14 @@ const Edit = props => {
   const blockPropsOverlay = {
     style: leftOverlay
   };
-  const bgLeftImage = {
+  const bgRightImage = {
+    position: 'absolute',
+    zInex: '-10',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+
     /* The image used */
     backgroundImage: `url(${rightBackgroundImage})`,
 
@@ -486,8 +493,21 @@ const Edit = props => {
   };
   const blockPropsTwo = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
     className: 'col-lg-6 quote-form',
-    style: bgLeftImage
+    style: bgRightImage
   });
+  const rightOverlay = {
+    position: 'absolute',
+    zInex: '-5',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    content: ' ',
+    background: 'rgba(255,255,255,.8)'
+  };
+  const blockPropsRightOverlay = {
+    style: rightOverlay
+  };
   return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
     title: 'Color del título',
     initialOpen: true
@@ -558,7 +578,12 @@ const Edit = props => {
   }, buttonText), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInputButton, {
     onChange: onChangeInputURL,
     url: inputURL
-  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockPropsTwo, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "col-lg-6 quote-form position-relative"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockPropsTwo), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockPropsRightOverlay), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "position-relative h-100 px-4 px-sm-5 pe-lg-0 wow fadeIn",
+    "data-wow-delay": "0.5s"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
     onSelect: onSelectRightBackgroundImage,
     value: rightBackgroundImage,
     type: "image",
@@ -574,9 +599,6 @@ const Edit = props => {
       });
     }
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
-    className: "h-100 px-4 px-sm-5 pe-lg-0 wow fadeIn",
-    "data-wow-delay": "0.5s"
-  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "bg-white p-4 p-sm-5"
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
     className: "row g-3"
