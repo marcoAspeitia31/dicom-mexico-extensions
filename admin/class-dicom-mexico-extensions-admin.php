@@ -141,7 +141,8 @@ class Dicom_Mexico_Extensions_Admin {
 			$this->plugin_name . '/facts',
 			$this->plugin_name . '/insights',
 			$this->plugin_name . '/right-content',
-			$this->plugin_name . '/lenft-content',
+			$this->plugin_name . '/left-content',
+			$this->plugin_name . '/contact-form-cta',
 		);
 
 		foreach( $blocks as $block_type ) {
