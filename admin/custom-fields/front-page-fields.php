@@ -25,7 +25,7 @@ if( ! function_exists( 'front_page_repeatable_banner_metabox' )  ) {
         $group_field_id = $front_page_repeatable_banner->add_field( array(
             'id'          => 'front_page_repeatable_banner_slide',
             'type'        => 'group',
-            'description' => esc_html__( 'Genera o remueve slides de banner, puedes poner promociones especiales', 'cmb2' ),
+            'description' => esc_html__( 'Agrega, ordena o elimina slides de banner<', 'cmb2' ),
             'options'     => array(
                 'group_title'    => esc_html__( 'Slide banner {#}', 'cmb2' ), // {#} gets replaced by row number
                 'add_button'     => esc_html__( 'Agregar un Slide', 'cmb2' ),
