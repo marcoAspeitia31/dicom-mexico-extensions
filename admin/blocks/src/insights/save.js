@@ -17,21 +17,43 @@ const Save = ( props ) => {
     } = props
 
     const parallax = {
+        position:  'absolute',
+        zInex: '-10',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+
         /* The image used */
-        backgroundImage: `url(${image})`,
+        backgroundImage: `url(${ image })`,
+        
         
         /* Create the parallax scrolling effect */
         backgroundAttachment: 'fixed',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundSize: 'cover'
+
+    }
+    
+    const overlay = {
+        position:  'absolute',
+        zInex: '-5',
+        top: '0',
+        left: '0',
+        width: '100%',
+        height: '100%',
+        background: 'rgba(1, 10, 53, .8)'
     }
 
     const blockProps = useBlockProps.save( { style: parallax } );
+    const blockPropsOverlay = useBlockProps.save( { style: overlay } )
 
     return (
-        <div className="container-fluid facts my-5 py-5" data-parallax='scroll' data-image-src={ image }>
-            <div className="container py-5">
+        <div className="container-fluid facts my-5 py-5 position-relative">
+            <div { ...blockProps } ></div>
+            <div { ...blockPropsOverlay }></div>
+            <div className="container py-5 position position-relative">
                 <div className="row g-5">
                     <div className="col-sm-6 col-lg-3 wow fadeIn text-center" data-wow-delay="0.1s">
                         <h3 className='display-4 text-white insight-number-one' data-toggle="counter-up">
