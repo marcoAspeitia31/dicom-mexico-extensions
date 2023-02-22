@@ -67,6 +67,8 @@ class Dicom_Mexico_Extensions_Admin {
 
 		add_action( 'admin_menu', array( $this, 'dme_options_menu_page' ) );
 
+		add_action( 'admin_menu', array( $this, 'dme_options_about_page' ) );
+
 	}
 
 	/**
@@ -336,6 +338,32 @@ class Dicom_Mexico_Extensions_Admin {
 
 	public function display_dme_options_menu_page() {
 		require_once plugin_dir_path( __FILE__ ) . 'partials/dicom-mexico-extensions-admin-display.php';
+	}
+
+	/**
+	 * Register wordpress submenu page
+	 * 
+	 * @link https://developer.wordpress.org/reference/functions/add_submenu_page/
+	 */
+
+	public function dme_options_about_page() {
+		add_submenu_page(
+			'dme-options-menu',
+			'Acerca de',
+			'Acerca de',
+			'manage_options',
+			'dme-about',
+			array( $this, 'dme_options_about_page_callback' ),
+			1
+		);
+	}
+
+	/**
+	 * Render about
+	 * @return void
+	 */
+	public function dme_options_about_page_callback() {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/dicom-mexico-extensions-sumbenu-display.php';
 	}
 
 }

@@ -16,9 +16,10 @@ if ( ! function_exists( 'dme_theme_options_metabox' ) ) {
         $dme_options = new_cmb2_box( array(
             'id'           => 'dme-options-menu',
             'object_types' => array( 'options-page' ),    
-            'option_key'      => 'dme-options-menu', 'parent_slug'             => 'admin.php?page=dme-options-menu',
-            'save_button'             => esc_html__( 'Guardar cambios', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-            'message_cb'              => 'dme_theme_options_message_callback',
+            'option_key'   => 'dme-options-menu',
+            'parent_slug'  => 'admin.php?page=dme-options-menu',
+            'save_button'  => esc_html__( 'Guardar cambios', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+            'message_cb'   => 'dme_theme_options_message_callback',
         ) );
     
         /**
