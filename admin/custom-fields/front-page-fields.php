@@ -11,6 +11,13 @@ if( ! function_exists( 'front_page_repeatable_banner_metabox' )  ) {
     function front_page_repeatable_banner_metabox() {
     
         $id_front_page = get_option( 'page_on_front' );
+
+        $all_pages = get_pages();
+        $options_select = array();
+
+        foreach($all_pages as $page) {
+            $options_select[ get_permalink( $page->ID ) ] = $page->post_title;
+        }
     
         /**
          * Repeatable Field Groups
@@ -68,16 +75,17 @@ if( ! function_exists( 'front_page_repeatable_banner_metabox' )  ) {
         ) );
     
         $front_page_repeatable_banner->add_group_field( $group_field_id, array(
-            'name' => esc_html__( 'Texto CTA', 'cmb2' ),
+            'name' => esc_html__( 'CTA Text', 'cmb2' ),
             'id'   => 'texto_cta',
             'type' => 'text',
         ) );
     
         $front_page_repeatable_banner->add_group_field( $group_field_id, array(
-            'name' => esc_html__( 'URL CTA', 'cmb2' ),
+            'name' => esc_html__( 'CTA Page Redirection', 'cmb2' ),
             'id'   => 'url_cta',
-            'type' => 'text_url',
-            'protocols' => array( 'https' ),
+            'type' => 'select',
+            'show_option_none' => true,
+            'options' => $options_select,
         ) );
     
     }

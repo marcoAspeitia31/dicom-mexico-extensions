@@ -102,7 +102,7 @@ const Save = ( props ) => {
                     </div>
                     <div className="col-lg-6 wow fadeInUp">
                     <div className="featured-facts position-relative rounded overflow-hidden h-100">
-                        <img className="position-absolute w-100 h-100 featured-facts-img" src={ mainImage } alt={ mainImageAlt } />
+                        <img className="position-absolute img-fluid featured-facts-img" src={ mainImage } alt={ mainImageAlt } />
                     </div>
                 </div>
                 </div>
