@@ -101,7 +101,44 @@ if ( ! function_exists( 'dme_theme_options_metabox' ) ) {
             'id'   => 'contact_address',
             'type' => 'textarea_small',
         ) );
+
+        /**
+         * ===========   Social Media   ============
+         */
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Información de redes sociales', 'cmb2' ),
+            'desc' => esc_html__( 'Agregar URLs de las redes sociales', 'cmb2' ),
+            'id'   => 'dme_options_rrss_title',
+            'type' => 'title',
+        ) );
     
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Facebook', 'cmb2' ),
+            'desc' => esc_html__( 'URL de Facebook', 'cmb2' ),
+            'id'   => 'facebook_url',
+            'type' => 'text_url',
+        ) );
+
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Twitter', 'cmb2' ),
+            'desc' => esc_html__( 'URL de twitter', 'cmb2' ),
+            'id'   => 'twitter_url',
+            'type' => 'text_url',
+        ) );
+
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Instagram', 'cmb2' ),
+            'desc' => esc_html__( 'URL de instagram', 'cmb2' ),
+            'id'   => 'instagram_url',
+            'type' => 'text_url',
+        ) );
+
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Linkedin', 'cmb2' ),
+            'desc' => esc_html__( 'URL de linkedin', 'cmb2' ),
+            'id'   => 'linkedin_url',
+            'type' => 'text_url',
+        ) );
     }
     add_action( 'cmb2_admin_init', 'dme_theme_options_metabox' );
 

@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const data = new FormData($form)
         const dataParse = new URLSearchParams(data)
 
-        fetch('http://dicom-mexico.local/wp-json/dme/login',{
+        fetch(`${dme.rest_url}/login`,{
             method: 'POST',
             body: dataParse
         })

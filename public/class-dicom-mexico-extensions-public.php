@@ -100,6 +100,9 @@ class Dicom_Mexico_Extensions_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dicom-mexico-extensions-public.js', array( 'jquery' ), $this->version, false );
 		wp_enqueue_script( 'dme-api-rest', plugin_dir_url( __FILE__ ) . 'js/api-rest.js', array( ), $this->version, false );
+		wp_localize_script( 'dme-api-rest', 'dme', array( 
+			'rest_url' => rest_url('dme'),
+		) );
 
 	}
 
