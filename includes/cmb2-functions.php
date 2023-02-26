@@ -22,6 +22,13 @@ if ( file_exists( dirname( __FILE__ ) . '/cmb2/init.php' ) ) {
 }
 
 /**
+ * If this line is uncomented will display the metaboxes fields in this docs
+ * 
+ * @since 1.0.0
+ */
+return;
+
+/**
  * Conditionally displays a metabox when used as a callback in the 'show_on_cb' cmb2_box parameter
  *
  * @param  CMB2 $cmb CMB2 object.

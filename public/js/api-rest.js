@@ -1,7 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-    console.log("registro cargado")
-
     const $form = document.getElementById('dme-login-form')
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -29,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
             body: dataParse
         })
         .then( res => res.json() )
-        .then( json=> {
+        .then( json => {
             if( json.error ){
                 alert(json.error, 'danger')
             }
