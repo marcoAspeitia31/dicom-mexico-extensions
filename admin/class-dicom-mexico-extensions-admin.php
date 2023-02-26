@@ -52,6 +52,8 @@ class Dicom_Mexico_Extensions_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->load_dependencies();
+		
 		$this->blocks_assets = $blocks_assets;
 
 		$this->admin_path = plugin_dir_path( __FILE__ );
@@ -68,6 +70,17 @@ class Dicom_Mexico_Extensions_Admin {
 		add_action( 'admin_menu', array( $this, 'dme_options_menu_page' ) );
 
 		add_action( 'admin_menu', array( $this, 'dme_options_about_page' ) );
+
+	}
+
+	public function load_dependencies() {
+
+		/**
+		 * This section is responsible to add the CMB2 Metaboxes
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/posts-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/dicom-theme-options-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/front-page-fields.php';
 
 	}
 
