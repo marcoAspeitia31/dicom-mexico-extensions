@@ -52,6 +52,8 @@ class Dicom_Mexico_Extensions_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->load_dependencies();
+
 	}
 
 	/**
@@ -97,6 +99,12 @@ class Dicom_Mexico_Extensions_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dicom-mexico-extensions-public.js', array( 'jquery' ), $this->version, false );
+
+	}
+
+	public function load_dependencies(){
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/shortcode/dme-login.php';
 
 	}
 
