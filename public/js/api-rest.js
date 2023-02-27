@@ -16,25 +16,27 @@ window.addEventListener("DOMContentLoaded", () => {
         alertPlaceholder.append(wrapper)
     }
 
-    $form.addEventListener('submit',(e) => {
-        e.preventDefault()
-
-        const data = new FormData($form)
-        const dataParse = new URLSearchParams(data)
-
-        fetch(`${dme.rest_url}/login`,{
-            method: 'POST',
-            body: dataParse
+    if( $form ) {
+        $form.addEventListener('submit',(e) => {
+            e.preventDefault()
+    
+            const data = new FormData($form)
+            const dataParse = new URLSearchParams(data)
+    
+            fetch(`${dme.rest_url}/login`,{
+                method: 'POST',
+                body: dataParse
+            })
+            .then( res => res.json() )
+            .then( json => {
+                if( json.error ){
+                    alert(json.error, 'danger')
+                }
+            } )
+            .catch( error => (`Hay un error ${error}`) )
+    
         })
-        .then( res => res.json() )
-        .then( json => {
-            if( json.error ){
-                alert(json.error, 'danger')
-            }
-        } )
-        .catch( error => (`Hay un error ${error}`) )
-
-    })
+    }
 
     const alertTrigger = document.getElementById('liveAlertBtn')
     if (alertTrigger) {
