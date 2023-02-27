@@ -102,6 +102,13 @@ if ( ! function_exists( 'dme_theme_options_metabox' ) ) {
             'type' => 'textarea_small',
         ) );
 
+        $dme_options->add_field( array(
+            'name' => esc_html__( 'Slogan', 'cmb2' ),
+            'desc' => esc_html__( 'Agregar slogan de la empresa', 'cmb2' ),
+            'id'   => 'contact_slogan',
+            'type' => 'textarea_small',
+        ) );
+
         /**
          * ===========   Social Media   ============
          */
