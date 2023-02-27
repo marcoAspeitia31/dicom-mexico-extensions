@@ -1,7 +1,23 @@
 <?php
 // Silence is golden
 
-if( ! function_exists( 'dme_login_form' ) ) {
+if ( ! function_exists( 'dme_login_script' ) ) {
+
+    function dme_login_script() {
+
+        wp_register_script( 'dme-api-rest', plugin_dir_url( dirname( __FILE__ ) ) . 'js/api-rest.js', array( ), '1.0.0', false );
+		wp_localize_script( 'dme-api-rest', 'dme', array( 
+			'rest_url' => rest_url('dme'),
+		) );
+
+    }
+    add_action( 'wp_enqueue_scripts', 'dme_login_script' );
+
+}
+
+if ( ! function_exists( 'dme_login_form' ) ) {
+
+    wp_enqueue_script( 'dme-api-rest' );
 
     function dme_login_form(){
 
