@@ -52,6 +52,8 @@ class Dicom_Mexico_Extensions_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		$this->load_dependencies();
+		
 		$this->blocks_assets = $blocks_assets;
 
 		$this->admin_path = plugin_dir_path( __FILE__ );
@@ -64,6 +66,21 @@ class Dicom_Mexico_Extensions_Admin {
 		add_action( 'enqueue_block_editor_assets', array( $this, 'dme_blocks_enqueue_scripts' ) );
 
 		add_action( 'rest_api_init', array( $this, 'dme_posts_featured_media_api' ) );
+
+		add_action( 'admin_menu', array( $this, 'dme_options_menu_page' ) );
+
+		add_action( 'admin_menu', array( $this, 'dme_options_about_page' ) );
+
+	}
+
+	public function load_dependencies() {
+
+		/**
+		 * This section is responsible to add the CMB2 Metaboxes
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/posts-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/dicom-theme-options-fields.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/custom-fields/front-page-fields.php';
 
 	}
 
@@ -137,6 +154,10 @@ class Dicom_Mexico_Extensions_Admin {
 		$blocks = array(
 			$this->plugin_name . '/about',
 			$this->plugin_name . '/facts',
+			$this->plugin_name . '/insights',
+			$this->plugin_name . '/right-content',
+			$this->plugin_name . '/left-content',
+			$this->plugin_name . '/contact-form-cta',
 		);
 
 		foreach( $blocks as $block_type ) {
@@ -207,7 +228,7 @@ class Dicom_Mexico_Extensions_Admin {
 	 * @link	https://developer.wordpress.org/block-editor/how-to-guides/block-tutorial/creating-dynamic-blocks/
 	 */
 
-	function dme_news_dynamic_block_init() {
+	public function dme_news_dynamic_block_init() {
 		register_block_type( 
 			$this->admin_path . 'blocks/news',
 			array(
@@ -217,10 +238,63 @@ class Dicom_Mexico_Extensions_Admin {
 	}
 
 	// Database query to render in the frontend
-	function dme_news_render_callback( $block_attributes, $block_content ) {
-		$return = '<p class=wp-block-plz-news>Hola</p>';
+	public function dme_news_render_callback( $block_attributes, $block_content ) {
 
-		return $return;
+		$block_classes = isset( $block_attributes['className'] ) ? $block_attributes[ 'className' ] . 'wp-block-dme-news' : 'wp-block-dme-news';
+		$block_title = isset( $block_attributes['title'] ) ? $block_attributes['title'] : 'Últimas noticias';
+
+		$args = array(
+			'posts_per_page' => $block_attributes['per_page']
+		);
+
+		if( isset( $block_attributes['category'] ) && $block_attributes['category'] != 0 ) {
+			$args['tax_query'] = array(
+                array(
+                    'taxonomy'  => 'category',
+                    'field'     => 'term_id',
+                    'terms'     => $block_attributes['category'], //
+                )
+            );
+		}
+
+		$posts = new WP_Query( $args );
+
+		$render = '';
+
+		if( $posts->have_posts( ) ) {
+			$render .= '<div class="' . esc_attr( $block_classes ) . '">';
+				$render .= '<div class="container-xxl py-5">';
+					$render .= '<div class="container">';
+						$render .= '<div class="text-center mx-auto wow fadeInUp">';
+							$render .= '<h2 class="display-6 mb-5">' . $block_title . '</h2>';
+						$render .= '</div>';
+						$render .= '<div class="row g-4 justify-content-center">';
+							while( $posts->have_posts( ) ){
+								$posts->the_post( );
+								$iconNews = get_post_meta( get_the_ID(  ), 'dme_posts_metabox_icon_image_loop', true );
+								$render.= '<div class="col-lg-4 col-md-6 wow fadeInUp">';
+									$render .= '<div class="service-item">';
+										$render .= get_the_post_thumbnail( get_the_ID(), 'services-thumb' );
+										$render .= '<div class="d-flex align-items-center bg-light">';
+											$render .= '<div class="service-icon flex-shrink-0 bg-primary">';
+											$render .= '<img class="img-fluid" src=' . esc_url( $iconNews ) . '></img>';
+											$render .= '</div>';
+											$render .= '<a class="h4 mx-4 mb-0" href=' . get_the_permalink( get_the_ID() ) . '>';
+											$render .= get_the_title( get_the_ID( ) );
+											$render .= '</a>';
+										$render .= '</div>';
+									$render .= '</div>';
+								$render .= '</div>';
+							}
+						$render .= '</div>';
+					$render .= '</div>';
+				$render .= '</div>';
+			$render .= '</div>';
+		}
+
+		wp_reset_postdata( );
+
+		return $render;
 	}
 
 	/**
@@ -247,12 +321,62 @@ class Dicom_Mexico_Extensions_Admin {
 	public function dme_get_post_featured_image( $object ) {
 		if( $object['featured_media'] ){
 			//Get the image URL
-			$field = wp_get_attachment_image_src( $object['featured_media'], 'large', false );
+			$field = wp_get_attachment_image_src( $object['featured_media'], 'services-thumb', false );
 
 			//returns the URL
 			return $field[0];
 		}
 		return false;
+	}
+
+	/**
+	 * Register wordpress menu page
+	 * 
+	 * @since v1.0.0
+	 * @link https://developer.wordpress.org/reference/functions/add_menu_page/
+	 */
+	public function dme_options_menu_page() {
+
+		add_menu_page( 
+			$this->plugin_name,
+			'Dicom México Theme Options',
+			'manage_options',
+			'dme-options-menu',
+			array( $this, 'display_dme_options_menu_page' ),
+			'dashicons-clipboard',
+			2
+		);
+
+	}
+
+	public function display_dme_options_menu_page() {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/dicom-mexico-extensions-admin-display.php';
+	}
+
+	/**
+	 * Register wordpress submenu page
+	 * 
+	 * @link https://developer.wordpress.org/reference/functions/add_submenu_page/
+	 */
+
+	public function dme_options_about_page() {
+		add_submenu_page(
+			'dme-options-menu',
+			'Acerca de',
+			'Acerca de',
+			'manage_options',
+			'dme-about',
+			array( $this, 'dme_options_about_page_callback' ),
+			1
+		);
+	}
+
+	/**
+	 * Render about
+	 * @return void
+	 */
+	public function dme_options_about_page_callback() {
+		require_once plugin_dir_path( __FILE__ ) . 'partials/dicom-mexico-extensions-sumbenu-display.php';
 	}
 
 }

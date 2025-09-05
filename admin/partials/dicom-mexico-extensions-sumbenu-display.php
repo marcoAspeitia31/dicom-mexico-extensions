@@ -14,5 +14,7 @@
 ?>
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
-<h1>Dicom México Theme Options</h1>
+<h1>Acerca de</h1>
 <hr>
+<p class="text-center">Plugin personalizado desarrollado por DevITM</p>
+<a href="https://devitm.com/" target="_blank" rel="noopener noreferrer">devitm.com</a>

@@ -8,5 +8,17 @@
     "keywords": ["posts", "news", "dicom"],
     "version": "0.0.1",
     "textdomain": "dicom-mexico-extensions",
+    "attributes": {
+        "title": {
+            "type": "string",
+            "selector": "h2"
+        },
+        "category": {
+            "type": "string"
+        },
+        "per_page": {
+            "type": "integer"
+        }
+    },
     "editorScript": "file:./build/index.js"
 }

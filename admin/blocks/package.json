@@ -17,6 +17,7 @@
     "plugin-zip": "wp-scripts plugin-zip",
     "start": "wp-scripts start",
     "start:news": "wp-scripts start ./news/src/index.js --output-path=./news/build",
+    "start:right-content": "wp-scripts start ./src/right-content/index.js --output-path=./build",
     "test:e2e": "wp-scripts test-e2e",
     "test:unit": "wp-scripts test-unit-js"
   },

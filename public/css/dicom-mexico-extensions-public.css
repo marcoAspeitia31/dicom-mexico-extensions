@@ -2,3 +2,14 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+ .dm-title::after{
+    max-width: 20rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    background-color: var(--primary);
+    height: 3px;
+    content: "";
+    display: block;
+}

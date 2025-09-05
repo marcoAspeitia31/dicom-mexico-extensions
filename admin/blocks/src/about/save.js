@@ -12,7 +12,8 @@ const Save = ( props ) => {
             imageTwoAlt,
             subtitleOne,
             subtitleTwo,
-            featuredSectionImage
+            featuredSectionImage,
+            featuredSectionImageAlt
         }
     } = props
 
@@ -57,7 +58,7 @@ const Save = ( props ) => {
                             </div>
                     </div>
                     <div className="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <img className="img-fluid" src={ featuredSectionImage } />
+                        <img className="img-fluid main-image" src={ featuredSectionImage } alt={ featuredSectionImageAlt } />
                     </div>
                 </div>
             </div>
